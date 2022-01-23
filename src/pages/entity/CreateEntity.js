@@ -7,7 +7,7 @@ function createEntity() {
   <div>
     <Header title='Create Entity' />
     <Content />
-    <Button text='Create Entity' onClick={() => {}} style={{marginTop: '20px'}} />
+    {/* <Button text='Create Entity' onClick={() => {}} style={{marginTop: '20px'}} /> */}
   </div>
   );
 }

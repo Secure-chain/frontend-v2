@@ -4,9 +4,6 @@ function Header({title}) {
   return (
   <div className='header-container'>
     <div className='header'>{title}</div>
-    {
-        {/* Conditional rendering for other components */}
-    }
   </div>
   );
 }
