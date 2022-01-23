@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './input.css';
 function Input({type, placeholder, value, onChange, onBlur, onFocus, style}) {
   return (
   <div>
@@ -8,9 +8,10 @@ function Input({type, placeholder, value, onChange, onBlur, onFocus, style}) {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        style={style}
         onBlur={onBlur}
         onFocus={onFocus}
-        style={style}
+        className='input-field'
      />
   </div>
   )

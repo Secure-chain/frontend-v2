@@ -1,0 +1,9 @@
+.input-field{
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 35px;
+    padding: 0 10px;
+    outline: none;
+}
