@@ -4,23 +4,23 @@ import * as IoIcons from 'react-icons/io'
 import * as GrIcons from 'react-icons/gr'
 import './EntityCreation.css';
 
-export const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length}) => {
+export const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length, trigger}) => {
     const [name, setName] = useState(initialName);
     const [type, setType] = useState(initialType);
   
     const handleAddFields  = () => {
       AddFields(name, type, index)
     }
-  
-    const handleRemoveFields = () => {
-      RemoveFields(index)
-    }
+    useEffect(() => {
+      setName(initialName)
+      setType(initialType)
+    },[trigger])
+
     return(
       <div className='attributes'>
         <div className='attributeName'>
-          {console.log('hi' + index)}
           <h3>Attribute Name</h3>
-          <input type = {'text'} onChange = {e => setName(e.target.value)}></input>
+          <input value={name} type = {'text'} onChange = {e => setName(e.target.value)}></input>
         </div>
         <div>
           <h3>Attribute Type</h3>
@@ -31,7 +31,6 @@ export const AttributeInput = ({initialName, initialType, index, AddFields, Remo
         <div className='iconDelete'>
           <GrIcons.GrSubtractCircle disabled={length === 1} onClick={()=>RemoveFields(index)}/>
         </div>
-        {console.log(index, length)}
         {index === length - 1?
         <div className='iconAdd'>
           <IoIcons.IoIosAddCircleOutline onClick={handleAddFields}/>

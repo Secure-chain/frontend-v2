@@ -44,18 +44,30 @@ import { AttributeInput } from './AddAttribute';
 
 function EntityCreation() {
   const [entityName, setEntityName] = useState('')
-  let inputFields = [{name: '', type: '' }];
+  const [inputFields,setInputFields] = useState([{
+    name: '',
+    type: '',
+  }])
+  const [trigger, setTrigger] = useState(false)
   const [template, setTemplate] = useState({options : []})
-
   const handleAddFields = (name, type) => {
-    inputFields.push({name, type});
-    console.log('in handleadd',inputFields)
+    // inputFields.push({name:name, type:type});
+    let temp = [...inputFields];
+    temp[temp.length - 1].name = name;
+    temp[temp.length - 1].type = type;
+    temp.push({name: '', type: ''});
+    setInputFields(temp);
   }
-
+  const triggerRender = () => {
+    setTrigger(!trigger)
+  }
   const handleRemoveFields = (index) => {
-    console.log('in handleremove', inputFields)
-    inputFields.splice(index, 1);
-
+    // console.log('in handleremove', inputFields)
+    let newInputFields = [...inputFields];
+    newInputFields.splice(index, 1);
+    triggerRender();
+    console.log(newInputFields)
+    setInputFields(newInputFields);
   }
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -79,9 +91,6 @@ function EntityCreation() {
     });
   },[]);
 
-  useEffect(()=>{
-    console.log(inputFields)
-  },[inputFields])
   return (
     <div className='entityCreationTop'>
       <form className='entityCreation'>
@@ -97,9 +106,9 @@ function EntityCreation() {
             <select>
             <option value="none" selected disabled hidden>Select an Option</option>
               {
-                  template.options.map((x)=>{
+                  template.options.map((x,index)=>{
                   return(
-                  <option value = {x.value}>{x.label}</option>);
+                  <option key={index} value = {x.value}>{x.label}</option>);
                 })
               }
             </select>
@@ -110,8 +119,8 @@ function EntityCreation() {
           <div className='addAttributes'>
             <h2>Add Attributes</h2>
             {inputFields.map((a, index) =>{
-              console.log(a);
-              return (<AttributeInput initialName = {a.name} initialType={a.type} index = {index} AddFields = {handleAddFields}  RemoveFields = {handleRemoveFields} length = {inputFields.length}/>
+              return (
+                <AttributeInput key={index} initialName = {a.name} initialType={a.type} index = {index} AddFields = {handleAddFields}  RemoveFields = {handleRemoveFields} length = {inputFields.length} trigger={trigger}/>
                 )
               })
             }
