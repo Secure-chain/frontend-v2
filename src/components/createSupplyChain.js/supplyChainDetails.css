@@ -1,0 +1,39 @@
+.supply-chain-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+}
+.supply-chain-header{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 40px;
+    color: #000000;
+    text-align: left;
+    width: 80%;
+}
+.input-container{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin-top: 50px;
+}
+.input-label{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+    margin: 10px 0 ;
+}
+.next-btn{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
+}
