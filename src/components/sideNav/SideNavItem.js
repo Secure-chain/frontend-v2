@@ -17,7 +17,7 @@ const SideNavItem = [
       },
       {
         title : 'Owned Supply Chains',
-        path : '',
+        path : '/dashboard/ownedsupplychains',
         icon : <FaIcons.FaUserCircle/>
       },
       {
