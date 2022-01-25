@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import Input from '../common/input/Input'
 import Button from '../common/button/Button';
 import './supplyChainDetails.css';
-import { initObject } from '../initVariables/initObject';
 import { postSupplyChainDetails } from '../../APIcalls/CreateSupplyChain/postSupplyChainDetails';
-function SupplyChainDetails({setId}) {
+
+function SupplyChainDetails({setId,handleTabChange}) {
   const [supplyChainDetails, setSupplyChainDetails] = useState({
     name: '',
     details: '',
@@ -12,6 +12,7 @@ function SupplyChainDetails({setId}) {
   const handleNext = async() => {
     const ids =  await postSupplyChainDetails(supplyChainDetails);
     setId(ids);
+    handleTabChange(2);
   }
   return (
   <div>
