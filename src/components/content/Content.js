@@ -20,7 +20,11 @@ const [id,setId] = useState(0);
         </div>
         <div className='divider'></div>
         <div className='tab-content'>
-            {tab === 1 && <SupplyChainDetails setId={(data)=>setId(data)}/>}
+            {tab === 1 &&
+             <SupplyChainDetails 
+                setId={(data)=>setId(data)} 
+                handleTabChange={(data)=>setTab(data)}
+            />}
             {tab === 2 && <EntityCreation />}
         </div>
         {/* Call different components based on request */}
