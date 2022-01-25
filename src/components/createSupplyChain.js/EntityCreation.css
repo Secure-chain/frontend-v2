@@ -1,0 +1,53 @@
+.entityCreation{
+    display: flex;
+    flex-flow: column;
+}
+
+h1{
+    margin-left: 53px;
+}
+h2{
+    margin-left: 53px;
+}
+
+.formInput input{
+    margin-left: 53px;
+    width: 350px;
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.formDropdown select{
+    margin-left: 60px;
+}
+
+.formTop{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-evenly;
+}
+
+.attributes{
+    display: flex;
+    flex-flow: wrap;
+    margin-left: 81px;
+    column-gap: 15px;
+}
+
+.formBottom{
+    display: flex;
+    justify-content: space-evenly;
+    margin-left: 23px;
+}
+
+.attributeName input{
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 200px;
+    height: 46px;
+}
