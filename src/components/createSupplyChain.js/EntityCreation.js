@@ -4,6 +4,7 @@ import * as IoIcons from 'react-icons/io'
 import * as GrIcons from 'react-icons/gr'
 import './EntityCreation.css';
 import { AttributeInput } from './AddAttribute';
+import Button from '../common/button/Button';
 
 // const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length}) => {
 //   const [name, setName] = useState(initialName);
@@ -44,6 +45,7 @@ import { AttributeInput } from './AddAttribute';
 
 function EntityCreation() {
   const [entityName, setEntityName] = useState('')
+  const [entityList, setEntityList] = useState([])
   const [inputFields,setInputFields] = useState([{
     name: '',
     type: '',
@@ -91,6 +93,13 @@ function EntityCreation() {
     });
   },[]);
 
+  const handleSubmit = () => {
+    setEntityList(entityList => 
+      [...entityList,entityName]);
+    console.log(entityList);
+  }
+
+
   return (
     <div className='entityCreationTop'>
       <form className='entityCreation'>
@@ -131,6 +140,9 @@ function EntityCreation() {
           </div>
         </div>
       </form>
+      <div className='entityCreationBtn'>
+        <Button text = {'Add Entity'} onClick={handleSubmit}> </Button>
+      </div>
     </div>
   );
 }

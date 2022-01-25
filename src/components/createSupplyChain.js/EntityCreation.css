@@ -73,4 +73,18 @@ h2{
 .iconDelete{
     margin: auto;
     margin-top: 76px;
+    flex: 0 0 10px;
+}
+
+.icons{
+    display: flex;
+    column-gap: 9px;
+}
+
+.entityCreationBtn{
+    display: flex;
+    /* margin: auto; */
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
 }

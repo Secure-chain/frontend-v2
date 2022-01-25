@@ -28,14 +28,16 @@ export const AttributeInput = ({initialName, initialType, index, AddFields, Remo
             <option value="none" selected disabled hidden>Select an Option</option>
           </select>
         </div>
-        <div className='iconDelete'>
-          <GrIcons.GrSubtractCircle disabled={length === 1} onClick={()=>RemoveFields(index)}/>
+        <div className='icons'>
+          <div className='iconDelete'>
+            <GrIcons.GrSubtractCircle disabled={length === 1} onClick={()=>RemoveFields(index)}/>
+          </div>
+          {index === length - 1?
+          <div className='iconAdd'>
+            <IoIcons.IoIosAddCircleOutline onClick={handleAddFields}/>
+          </div>
+          :null}
         </div>
-        {index === length - 1?
-        <div className='iconAdd'>
-          <IoIcons.IoIosAddCircleOutline onClick={handleAddFields}/>
-        </div>
-        :null}
       </div>
     )
   }
