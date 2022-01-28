@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SupplyChainDetails from '../createSupplyChain.js/SupplyChainDetails';
 import EntityCreation from '../createSupplyChain.js/EntityCreation';
 import './content.css';
 function Content() {
-const [tab, setTab] = React.useState(1);
+const [tab, setTab] = useState(1);
+const [id,setId] = useState(0);
   return (
   <div className='right-window' style={tab == 2 ? {height : 'max-content'} : null}>
     <div className='create-chain-container' >
@@ -17,8 +18,13 @@ const [tab, setTab] = React.useState(1);
                 <div className='tab-text'>Entity and Flow Creation</div>
             </div>
         </div>
+        <div className='divider'></div>
         <div className='tab-content'>
-            {tab === 1 && <SupplyChainDetails />}
+            {tab === 1 &&
+             <SupplyChainDetails 
+                setId={(data)=>setId(data)} 
+                handleTabChange={(data)=>setTab(data)}
+            />}
             {tab === 2 && <EntityCreation />}
         </div>
         {/* Call different components based on request */}
