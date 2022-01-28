@@ -44,6 +44,8 @@ import Button from '../common/button/Button';
 // }
 
 function EntityCreation() {
+  let templateId = 0;
+  const [formkey, setFormkey] = useState(2);
   const [entityName, setEntityName] = useState('')
   const [entityList, setEntityList] = useState([])
   const [inputFields,setInputFields] = useState([{
@@ -52,6 +54,8 @@ function EntityCreation() {
   }])
   const [trigger, setTrigger] = useState(false)
   const [template, setTemplate] = useState({options : []})
+  const [selectedTemplate, setSelectedTemplate] = useState({id : 0, templateName : '', attributes : []});
+  const [tempSelectedTemplate, setTempSelectedTemplate] = useState('');
   const handleAddFields = (name, type) => {
     // inputFields.push({name:name, type:type});
     let temp = [...inputFields];
@@ -60,6 +64,7 @@ function EntityCreation() {
     temp.push({name: '', type: ''});
     setInputFields(temp);
   }
+
   const triggerRender = () => {
     setTrigger(!trigger)
   }
@@ -92,27 +97,86 @@ function EntityCreation() {
         console.error(error.response)
     });
   },[]);
+  
+  const handleTemplate = (e) => {
+    templateId = e.target.value;
+    if (templateId !== 0){
+      axios.get(`https://securechain-backend.herokuapp.com/template/${templateId}/`,{
+        headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          }
+      }).then((res) => {
+        // console.log('api response 🚀', res)
+        let attrList = [];
+        attrList = res.data.attributes.split(';')
+        let finalAttrList = [];
+        attrList.map(e => {
+          return finalAttrList.push(JSON.parse(e))
+        })
+        //console.log(finalAttrList);
+        setSelectedTemplate({
+          id : res.data.id,
+          templateName : res.data.template_name,
+          attributes : finalAttrList
+        });
+        // console.log(JSON.stringify(res.data.attributes, null, 4));
+      }).catch((error) => {
+          console.error(error.response)
+      });
+      setTempSelectedTemplate(templateId);
+    }
+  }
 
-  const handleSubmit = () => {
-    setEntityList(entityList => 
-      [...entityList,entityName]);
+  const handleSubmit = (event, entityName, tempSelectedTemplate, inputFields) => {
+    //console.log('handleSubmit ke andar');
+    console.log(inputFields)
+    event.preventDefault();
+    let data = {
+      entity_name : entityName,
+      template_id : tempSelectedTemplate,
+      attributes : inputFields
+    }
+    setEntityList(entityList => ([...entityList, entityName]))
     console.log(entityList);
+    axios.post(`https://securechain-backend.herokuapp.com/entity/`, data,
+      {
+        headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+        }
+      }).then((res) => {
+        // console.log('api response 🚀', res)
+      }).catch((error) => {
+          console.error(error.response)
+      })
+        setEntityName('')
+        setInputFields([{
+          name: '',
+          type: '',
+        }])
+        setTempSelectedTemplate('');
+        setSelectedTemplate({id : 0, templateName : '', attributes : []});
+        setFormkey(formkey + 1);
+        setInputFields(
+          [{name: '', type: ''}]
+        )
+        setTrigger(false);
+        console.log(data);
   }
 
 
   return (
     <div className='entityCreationTop'>
-      <form className='entityCreation'>
+      <form className='entityCreation' onSubmit={handleSubmit}>
         <h1>Entity Creation</h1>
         <div className='formTop'>
           <div className='formInput'>
-            <h2>Entity Name</h2>
+            <h2>Entity Name </h2>
             <input type={'text'} onChange={e=> setEntityName(e.target.value)}></input>
           </div>
 
           <div className='formDropdown'>
             <h2>Select Template</h2>
-            <select>
+            {template.options && <select onChange={handleTemplate} >
             <option value="none" selected disabled hidden>Select an Option</option>
               {
                   template.options.map((x,index)=>{
@@ -120,7 +184,7 @@ function EntityCreation() {
                   <option key={index} value = {x.value}>{x.label}</option>);
                 })
               }
-            </select>
+            </select>}
           </div>
         </div>
 
@@ -137,11 +201,20 @@ function EntityCreation() {
 
           <div className='defaultAttributes'>
             <h2>Default Attributes</h2>
+            {selectedTemplate.attributes && selectedTemplate.attributes.map((value) => {
+              return (
+                <div className='attributeDetails'>
+                  <div>
+                    <h3>{value.name}</h3>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </form>
       <div className='entityCreationBtn'>
-        <Button text = {'Add Entity'} onClick={handleSubmit}> </Button>
+        <Button text = {'Add Entity'} onClick={event => handleSubmit(event, entityName, tempSelectedTemplate, inputFields)}> </Button>
       </div>
     </div>
   );
