@@ -68,7 +68,6 @@ function EntityCreation() {
   const triggerRender = () => {
     setTrigger(!trigger)
   }
-
   const handleRemoveFields = (index) => {
     // console.log('in handleremove', inputFields)
     let newInputFields = [...inputFields];
@@ -98,7 +97,7 @@ function EntityCreation() {
         console.error(error.response)
     });
   },[]);
-
+  
   const handleTemplate = (e) => {
     templateId = e.target.value;
     if (templateId !== 0){
