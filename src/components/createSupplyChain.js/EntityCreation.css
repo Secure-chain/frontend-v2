@@ -22,6 +22,11 @@ h2{
 
 .formDropdown select{
     margin-left: 60px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 46px;
 }
 
 .formTop{
@@ -37,6 +42,14 @@ h2{
     column-gap: 15px;
 }
 
+.attributes select{
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    border-radius: 5px;
+    height: 46px;
+}
+
 .formBottom{
     display: flex;
     justify-content: space-evenly;
@@ -50,4 +63,28 @@ h2{
     border-radius: 5px;
     width: 200px;
     height: 46px;
+}
+
+.iconAdd{
+    margin: auto;
+    margin-top: 76px;
+}
+
+.iconDelete{
+    margin: auto;
+    margin-top: 76px;
+    flex: 0 0 10px;
+}
+
+.icons{
+    display: flex;
+    column-gap: 9px;
+}
+
+.entityCreationBtn{
+    display: flex;
+    /* margin: auto; */
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
 }
