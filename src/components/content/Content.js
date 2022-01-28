@@ -6,7 +6,7 @@ function Content() {
 const [tab, setTab] = useState(1);
 const [id,setId] = useState(0);
   return (
-  <div className='right-window' style={tab == 2 ? {height : 'max-content'} : null}>
+  <div className='right-window' style={tab == 2 ? {height : 'max-content', paddingTop : '10px'} : null}>
     <div className='create-chain-container' >
         <div className='tab-container'>
             <div className='tab-group'>

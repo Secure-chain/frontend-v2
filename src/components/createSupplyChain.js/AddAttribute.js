@@ -26,6 +26,10 @@ export const AttributeInput = ({initialName, initialType, index, AddFields, Remo
           <h3>Attribute Type</h3>
           <select onChange = {e => setType (e.target.value)}>
             <option value="none" selected disabled hidden>Select an Option</option>
+            <option value="String">String</option>
+            <option value="Alphanumeric">Alphanumeric</option>
+            <option value="Number">Number</option>
+            <option value="Date">Date</option>
           </select>
         </div>
         <div className='icons'>
