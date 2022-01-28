@@ -10,17 +10,18 @@ function Playground({ initialElement,style }) {
       id: '1',
       type: 'input',
       data: { label: 'Node A' },
-      position: { x: 250, y: 0 },
+      position: { x: 200, y: 0 },
+      style: {display:'flex',alignItems:'center',  background: '#cfdcf1;', color: '#000', height: '0px', width: '80px',},
     },
     {
       id: '2',
       data: { label: 'Node B' },
-      position: { x: 100, y: 200 },
+      position: { x: 100, y: 100 },
     },
     {
       id: '3',
       data: { label: 'Node C' },
-      position: { x: 400, y: 200 },
+      position: { x: 300, y: 100 },
     },
     { id: 'e1-2', source: '1', target: '2', label: 'updatable edge' },
   ];
@@ -42,7 +43,6 @@ function Playground({ initialElement,style }) {
           style={{width:'100%'}}
           onConnect={onConnect}
           onEdgeUpdate={onEdgeUpdate}
-          connectionLineStyle={{stroke: "red", strokeWidth: 1}}
           connectionLineType = "bezier"
           snapToGrid = {true}
           snapGrid={[16,16]}

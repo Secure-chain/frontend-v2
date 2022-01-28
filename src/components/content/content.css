@@ -12,6 +12,8 @@
     background-color: #fff;
     border-radius: 30px;
     margin: auto;
+    margin-bottom : 20px;
+    padding-bottom: 20px;
 }
 .tab-container{
     width: 80%;
