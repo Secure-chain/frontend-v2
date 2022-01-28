@@ -171,7 +171,7 @@ function EntityCreation() {
         <h1>Entity Creation</h1>
         <div className='formTop'>
           <div className='formInput'>
-            <h2>Entity Name</h2>
+            <h2>Entity Name </h2>
             <input type={'text'} onChange={e=> setEntityName(e.target.value)}></input>
           </div>
 
