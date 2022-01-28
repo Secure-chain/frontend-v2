@@ -1,6 +1,6 @@
 import React from 'react';
 import './EntityCreation.css';
-
+import Playground from '../playground/Playground';
 function EntityCreation() {
   return (
     <div className='entityCreationTop'>
@@ -48,6 +48,9 @@ function EntityCreation() {
           </div>
         </div>
       </form>
+      <div className='create-entity-playground'>
+          <Playground style={{width:'80%',height:'200px'}}/>
+        </div>
     </div>
   );
 }

@@ -1,46 +1,47 @@
 import React, {useState, Fragment, useEffect} from 'react';
-import ReactFlow, {addEdge, Background, Controls, MiniMap} from 'react-flow-renderer';
+import ReactFlow, {addEdge, Background, Controls,updateEdge, MiniMap} from 'react-flow-renderer';
 
 const onLoad = (reactFlowInstance) =>  {
   reactFlowInstance.fitView();
 }
-function Playground({ initialElement }) {
-    let initialElements = [
-        {
-          id: '1', 
-          data:{label: 'Mind Node'},
-          style: {border: '1px solid black', backgroundColor: 'red',width: 'max-content', height: '20px',fontSize:'14px'},
-          position: {x:0,y:0},
-          connectable:'true',
-        },
-        {
-          id: '2',
-          data:{label: 'Mind Node'},
-          style: {border: '1px solid black', backgroundColor: 'red',width: 'max-content', height: '20px'},
-          position: {x:100,y:0},
-          connectable:'true',
-        }
-    ]
+function Playground({ initialElement,style }) {
+  const initialElements = [
+    {
+      id: '1',
+      type: 'input',
+      data: { label: 'Node A' },
+      position: { x: 250, y: 0 },
+    },
+    {
+      id: '2',
+      data: { label: 'Node B' },
+      position: { x: 100, y: 200 },
+    },
+    {
+      id: '3',
+      data: { label: 'Node C' },
+      position: { x: 400, y: 200 },
+    },
+    { id: 'e1-2', source: '1', target: '2', label: 'updatable edge' },
+  ];
+    const onEdgeUpdate = (oldEdge, newConnection) =>
+    setElements((els) => updateEdge(oldEdge, newConnection, els));
     
-    console.log("initialElements",initialElements);
     const [elements, setElements] = useState(initialElements);
 
     const onConnect = (params) =>{
         console.log(params);
         setElements(elements => addEdge(params ,elements));
     }
-    useEffect(() => {
-        setElements(initialElements);
-        console.log("elements",elements);
-    }, [initialElements])
   return (
-  <div style={{width:'500px',height:'500px', margin:"100px", marginLeft:'25%'}}>
+  <div style={style}>
       <Fragment>
         <ReactFlow
           elements={elements}
           onLoad={onLoad}
           style={{width:'100%'}}
           onConnect={onConnect}
+          onEdgeUpdate={onEdgeUpdate}
           connectionLineStyle={{stroke: "red", strokeWidth: 1}}
           connectionLineType = "bezier"
           snapToGrid = {true}
