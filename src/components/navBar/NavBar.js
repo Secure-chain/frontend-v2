@@ -6,10 +6,11 @@ function NavBar() {
   <>
     <nav className="navbar">
         <div className="navbar-logo">
-            {/* <h1>SecureChain</h1> */}
+            <p class="navbar-logo-text">Secure<span style={{fontWeight:`400`}}>chain</span></p>
+            
         </div>
-        <div className="">
-
+        <div className="nav-bar-welcome">
+          <p class="navbar-welcome">Welcome, Anuj</p>
         </div>
     </nav>
   </>

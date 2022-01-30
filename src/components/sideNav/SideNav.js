@@ -22,6 +22,7 @@ function SideNav() {
     line-height: 33px;
     font-color: #0F52BA;
     box-shadow: 5px 1px 12px -8px rgba(114,114,114,0.80);
+    padding-top:51px;
     ${'' /* margin-top:55px; */}
   `;
 
