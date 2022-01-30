@@ -12,7 +12,7 @@ function SupplyChainCard({title,date,description}) {
                 {date}
             </div>
             <div className='supply-chain-card-divider'>
-                <hr></hr>
+                {/* <hr></hr> */}
             </div>
             <div className='supply-chain-card-description'>
                 {description}
