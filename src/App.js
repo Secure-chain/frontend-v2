@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import NavBar from './components/navBar/NavBar'
 import SideNav from './components/sideNav/SideNav'
 import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
+import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
             </Route>
             <Route exact path="/dashboard/ownedsupplychains">
               <OwnedSupplyChains/>
+            </Route>
+            <Route exact path="/dashboard/participationrequests">
+              <ParticipationRequests/>
             </Route>
           </Switch>
       </Router>

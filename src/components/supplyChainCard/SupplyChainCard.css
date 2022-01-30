@@ -13,13 +13,14 @@
     font-weight: 800;
     font-size: 28px;
     margin-left: 40px;
-    margin-bottom:auto;
+    margin-top: 20px;
+    margin-bottom:10px;
 }
 .supply-chain-card-date{
     font-weight: 800;
     font-size: 16px;
     margin-left: 40px;
-    margin-top:-20px;
+    margin-top:10px;
     margin-bottom:20px;
 }
 .supply-chain-card-description{
@@ -32,16 +33,16 @@
     margin-left : 85%;
     margin-top : 20px;
 }
-hr{
+.supply-chain-card-divider{
     width : 15%;
-    border-top: 2px solid #0F52BA;
+    border-top: 4px solid #0F52BA;
     border-radius: 5px;
     margin-left : 4%;
 }
-.divider{
+/* .divider{
     display: flex;
     margin: auto;
     width: 80%;
     border: 1px solid #E5E5E5;
     margin-top: 25px;
-}
+} */
