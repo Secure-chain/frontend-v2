@@ -1,18 +1,27 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Playground from './components/playground/Playground'
+import NavBar from './components/navBar/NavBar'
 import SideNav from './components/sideNav/SideNav'
+import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
+import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 function App() {
   return (
     <div>
       <Router>
-      <SideNav/>
-        <Switch>
-          {/* <Route exact path="/" component={Home}/> */}
+        <NavBar/>
+        <SideNav/>
+          <Switch>
           <Route exact path="/createEntity" component={CreateEntity}/>
           <Route exact path="/test" component={Playground}/>
-        </Switch>
+            <Route exact path="/dashboard/ownedsupplychains">
+              <OwnedSupplyChains/>
+            </Route>
+            <Route exact path="/dashboard/participationrequests">
+              <ParticipationRequests/>
+            </Route>
+          </Switch>
       </Router>
 
     </div>
