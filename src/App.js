@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Playground from './components/playground/Playground'
 import NavBar from './components/navBar/NavBar'
 import SideNav from './components/sideNav/SideNav'
 import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
@@ -12,9 +13,8 @@ function App() {
         <NavBar/>
         <SideNav/>
           <Switch>
-            <Route exact path='/'>
-              <CreateEntity/>
-            </Route>
+          <Route exact path="/createEntity" component={CreateEntity}/>
+          <Route exact path="/test" component={Playground}/>
             <Route exact path="/dashboard/ownedsupplychains">
               <OwnedSupplyChains/>
             </Route>
