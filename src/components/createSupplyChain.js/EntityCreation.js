@@ -15,6 +15,7 @@ function EntityCreation() {
     name: '',
     type: '',
   }])
+  const [flow, setFlow] = useState([])
   const [trigger, setTrigger] = useState(false)
   const [template, setTemplate] = useState({options : []})
   const [selectedTemplate, setSelectedTemplate] = useState({id : 0, templateName : '', attributes : []});
@@ -126,6 +127,14 @@ function EntityCreation() {
         console.log(data);
   }
 
+  /// callback for edge update of entities ( flow update )
+  const handleFlowUpdate = (source, destination) => {
+    let temp = [...flow];
+    // remove duplicate data from temp
+    temp = temp.filter(e => e.source !== source || e.destination !== destination);
+    temp.push({source: source, destination: destination});
+    setFlow(temp);
+  }
 
   return (
     <div className='entityCreationTop'>
@@ -180,7 +189,7 @@ function EntityCreation() {
         <Button text = {'Add Entity'} onClick={event => handleSubmit(event, entityName, tempSelectedTemplate, inputFields)}> </Button>
       </div>
       <div className='create-entity-playground'>
-          <Playground style={{width:'100%',height:'200px'}}/>
+          <Playground style={{width:'100%',height:'200px'}}  entityArray={entityList} handleFlowUpdate={handleFlowUpdate}/>
         </div>
       
     </div>
