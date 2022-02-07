@@ -4,6 +4,8 @@ import ReactFlow, {addEdge, Background, Controls,updateEdge, MiniMap} from 'reac
 const onLoad = (reactFlowInstance) =>  {
   reactFlowInstance.fitView();
 }
+const nodeStyle = {display:'flex',alignItems:'center', textAlign:'center', background: '#cfdcf1', color: '#000', height: '0px', width: '80px'};
+
 function Playground({ initialElement,style }) {
   const initialElements = [
     {
@@ -11,17 +13,19 @@ function Playground({ initialElement,style }) {
       type: 'input',
       data: { label: 'Node A' },
       position: { x: 200, y: 0 },
-      style: {display:'flex',alignItems:'center',  background: '#cfdcf1;', color: '#000', height: '0px', width: '80px',},
+      style: nodeStyle,
     },
     {
       id: '2',
       data: { label: 'Node B' },
       position: { x: 100, y: 100 },
+      style: nodeStyle,
     },
     {
       id: '3',
       data: { label: 'Node C' },
       position: { x: 300, y: 100 },
+      style: nodeStyle,
     },
     { id: 'e1-2', source: '1', target: '2', label: 'updatable edge' },
   ];

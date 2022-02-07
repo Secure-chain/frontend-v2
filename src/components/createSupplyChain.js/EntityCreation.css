@@ -65,11 +65,14 @@ h2{
     height: 46px;
 }
 .create-entity-playground{
+    width: 80%;
     display: flex;
     justify-content: center;
-    padding-top: 20px;
-    padding-bottom: 50px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 50px;
     border: #000 solid 2px;
+    border-radius: 20px;
 }
 
 .iconAdd{

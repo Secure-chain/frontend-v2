@@ -107,7 +107,7 @@ function EntityCreation() {
         <Button text = {'Add Entity'} onClick={handleSubmit}> </Button>
       </div>
       <div className='create-entity-playground'>
-          <Playground style={{width:'80%',height:'200px'}}/>
+          <Playground style={{width:'100%',height:'200px'}}/>
         </div>
       
     </div>
