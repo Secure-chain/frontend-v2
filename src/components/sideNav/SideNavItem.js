@@ -5,19 +5,19 @@ import * as RiIcons from 'react-icons/ri'
 const SideNavItem = [
   {
     title : 'Dashboard',
-    path : '',
+    path : '/dashboard',
     iconClosed : <RiIcons.RiArrowDownSFill />,
     iconOpened : <RiIcons.RiArrowUpSFill />,
 
     subNav : [
       {
         title : 'Profile',
-        path : '',
+        path : './profile',
         icon : <FaIcons.FaUserCircle/>
       },
       {
         title : 'Owned Supply Chains',
-        path : '',
+        path : '/dashboard/ownedsupplychains',
         icon : <FaIcons.FaUserCircle/>
       },
       {
@@ -27,7 +27,7 @@ const SideNavItem = [
       },
       {
         title : 'Participation Request',
-        path : '',
+        path : '/dashboard/participationrequests',
         icon : <FaIcons.FaUserCircle/>
       }
     ]
@@ -41,7 +41,7 @@ const SideNavItem = [
     subNav : [
       {
         title : 'Create Supply Chain',
-        path : '',
+        path : '/createEntity',
         icon : <FaIcons.FaUserCircle/>
       },
       {
@@ -79,7 +79,7 @@ const SideNavItem = [
     subNav : [
       {
         title : 'Product Tracking',
-        path : '',
+        path : '/tracking',
         icon : <FaIcons.FaUserCircle/>
       }
     ]
