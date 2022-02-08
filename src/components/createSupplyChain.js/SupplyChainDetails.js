@@ -21,7 +21,7 @@ function SupplyChainDetails({setId,handleTabChange}) {
         Supply Chain Details
       </div>
       <div className='input-container'>
-        <div className='input-label'>
+        <div className ='input-label'>
           Name
         </div>
         <Input 
@@ -45,7 +45,7 @@ function SupplyChainDetails({setId,handleTabChange}) {
           style={{width: "100%", height: "100px",marginBottom: "20px"}}
         />
       </div>
-      <div className={'next-btn'}>
+      <div className = {'next-btn'}>
         <Button text={"Next Page"}  onClick={handleNext} />
       </div>     
     </div>
