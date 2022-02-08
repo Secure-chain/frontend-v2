@@ -2,6 +2,10 @@
     display: flex;
     flex-flow: row;
 }
+.picture{
+    margin: auto;
+    margin-top: 100px;
+}
 .content{
     margin: auto;
     margin-top: 50px;
@@ -26,6 +30,10 @@
     color: #000000;
 }
 .select-box{
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+}
+.select-btn{
     margin: auto;
     padding: 20px 20px 20px 20px;
 }
