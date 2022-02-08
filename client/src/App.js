@@ -7,6 +7,7 @@ import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
 import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 import ProductTracking from './pages/tracking/ProductTracking'
+import EnrollInSupplyChain from './pages/enrollInSupplyChain/EnrollInSupplyChain'
 import SupplyChainManagement from "./contracts/SupplyChainManagement.json";
 import getWeb3 from "./getWeb3";
 import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
@@ -77,6 +78,7 @@ function App() {
           <Route exact path="/dashboard/participationrequests">
             <ParticipationRequests/>
           </Route>
+          <Route exact path="/enroll" component={EnrollInSupplyChain} />
           <Route exact path="/tracking" component={ProductTracking}/>
         </Switch>
       </Router>

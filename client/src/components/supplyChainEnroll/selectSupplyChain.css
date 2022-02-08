@@ -1,0 +1,39 @@
+.supply-chain{
+    display: flex;
+    flex-flow: row;
+}
+.picture{
+    margin: auto;
+    margin-top: 100px;
+}
+.content{
+    margin: auto;
+    margin-top: 50px;
+    width: fit-content;
+    display: flex;
+    flex-flow: column;
+}
+.select-text{
+    margin: auto;
+    width: 425px;
+    height: 25px;
+
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+
+    text-align: right;
+
+    color: #000000;
+}
+.select-box{
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+}
+.select-btn{
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+}
