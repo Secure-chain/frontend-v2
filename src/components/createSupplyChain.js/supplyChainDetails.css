@@ -16,11 +16,11 @@
     text-align: left;
     width: 80%;
 }
-.input-container{
+.supply-input-container{
     display: flex;
-    flex-direction: column;
     width: 80%;
     margin-top: 50px;
+    flex-flow: column;
 }
 .input-label{
     font-family: Open Sans;

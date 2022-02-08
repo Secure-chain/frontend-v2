@@ -20,7 +20,7 @@ function SupplyChainDetails({setId,handleTabChange}) {
       <div className='supply-chain-header'>
         Supply Chain Details
       </div>
-      <div className='input-container'>
+      <div className='supply-input-container'>
         <div className='input-label'>
           Name
         </div>
