@@ -1,4 +1,5 @@
 .supply-chain-card{
+    position: relative;
     width: 92%;
     height: 40%;
     background-color: #fff;
@@ -6,7 +7,6 @@
     margin-left: auto;
     margin-right: auto;
     margin-top : 40px;
-    position: relative;
     /* margin-bottom : 40px; */
 }
 .supply-chain-card-title{
@@ -30,8 +30,10 @@
     margin-top:20px;
 }
 .supply-chain-card-button{
-    margin-left : 85%;
-    margin-top : 20px;
+    position : relative;
+    padding-left : 85%;
+    top : 30%;
+    /* bottom : 50%; */
 }
 .supply-chain-card-divider{
     width : 15%;
