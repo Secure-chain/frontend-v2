@@ -15,8 +15,21 @@ function TrackingContent() {
 
     return(
         <div className='right-window'>
-            <div className='create-chain-container' >
-
+            <div className='create-chain-container'>
+                <div className='input-container'>
+                    <div className='input-box'>
+                        <Input placeholder='Product Number' style={{ width: '250px' }} />
+                    </div>
+                    <div className='input-box'>
+                        <Input placeholder='Supply Chain ID' style={{ width: '150px' }} />
+                    </div>
+                    <div className='input-box'>
+                        <Input placeholder='Batch ID' style={{ width: '150px' }} />
+                    </div>
+                    <div className='input-box'>
+                        <Button text='Track History' style={{ width: '150px' }} />
+                    </div>
+                </div>
             </div>
         </div>
     );
