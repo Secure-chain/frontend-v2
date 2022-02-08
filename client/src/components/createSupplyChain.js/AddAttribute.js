@@ -4,7 +4,7 @@ import * as IoIcons from 'react-icons/io'
 import * as GrIcons from 'react-icons/gr'
 import './EntityCreation.css';
 
-export const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length, trigger}) => {
+export const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length, trigger, setCurrAtt}) => {
     const [name, setName] = useState(initialName);
     const [type, setType] = useState(initialType);
   
@@ -15,16 +15,21 @@ export const AttributeInput = ({initialName, initialType, index, AddFields, Remo
       setName(initialName)
       setType(initialType)
     },[trigger])
-
     return(
       <div className='attributes'>
         <div className='attributeName'>
           <h3>Attribute Name</h3>
-          <input value={name} type = {'text'} onChange = {e => setName(e.target.value)}></input>
+          <input value={name} type = {'text'} onChange = {e => {
+            setName(e.target.value,type)
+            setName(e.target.value)
+            }}></input>
         </div>
         <div>
           <h3>Attribute Type</h3>
-          <select onChange = {e => setType (e.target.value)}>
+          <select onChange = {e => {
+            setType(e.target.value)
+            setCurrAtt(name,e.target.value)
+          }}>
             <option value="none" selected disabled hidden>Select an Option</option>
             <option value="String">String</option>
             <option value="Alphanumeric">Alphanumeric</option>

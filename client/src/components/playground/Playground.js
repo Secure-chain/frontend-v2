@@ -37,8 +37,8 @@ function Playground({ entityArray,style, handleFlowUpdate}) {
       if(entityArray.length>0){
         entityArray.forEach((element,index) => {
           initialElements.push({
-            id: String(index+1),
-            data: { label: element},
+            id: String(element.id),
+            data: { label: element.entity_name},
             position: { x:x , y:y  },
             style: nodeStyle,
           });
@@ -66,7 +66,6 @@ function Playground({ entityArray,style, handleFlowUpdate}) {
       let temp = [...edgeElement];
       temp.forEach((element,index) => {
         if(element.id.includes('edge')){
-          console.log("element",element);
           // add a key style in this element
           temp[index].style = {
             stroke:'#0f52ba' 
@@ -76,7 +75,9 @@ function Playground({ entityArray,style, handleFlowUpdate}) {
       })
       setElements(temp);
     }
-
+useEffect(() => {
+  console.log('elements in playground', elements);
+}, [elements]);
   return (
   <div style={style}>
       <Fragment>

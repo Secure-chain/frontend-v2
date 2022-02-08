@@ -8,7 +8,7 @@ export const postSupplyChainDetails = async(data) => {
             }
         })
         // console.log('api response 🚀', res)
-        return res.data.id
+        return res.data
      }
      catch(error){
         console.error(error)
