@@ -6,6 +6,7 @@ import './EntityCreation.css';
 import Playground from '../playground/Playground';
 import Button from '../common/button/Button';
 import {AttributeInput} from './AddAttribute';
+import { postFlowArray } from '../../APIcalls/CreateSupplyChain/postFlowArray';
 function EntityCreation() {
   let templateId = 0;
   const [formkey, setFormkey] = useState(2);
@@ -136,6 +137,12 @@ function EntityCreation() {
     setFlow(temp);
   }
 
+/// Submit flow data to backend
+const handleSubmitFlow = () => {
+  postFlowArray(flow);
+  setFlow([]);
+}
+
   return (
     <div className='entityCreationTop'>
       <form className='entityCreation' onSubmit={handleSubmit}>
@@ -189,9 +196,11 @@ function EntityCreation() {
         <Button text = {'Add Entity'} onClick={event => handleSubmit(event, entityName, tempSelectedTemplate, inputFields)}> </Button>
       </div>
       <div className='create-entity-playground'>
-          <Playground style={{width:'100%',height:'200px'}}  entityArray={entityList} handleFlowUpdate={handleFlowUpdate}/>
-        </div>
-      
+        <Playground style={{width:'100%',height:'200px'}}  entityArray={entityList} handleFlowUpdate={handleFlowUpdate}/>
+      </div>
+      <div className='entityCreationBtn'>
+        <Button text={'Save and Finish'} onClick={e => handleSubmitFlow()} />
+      </div>
     </div>
   );
 }

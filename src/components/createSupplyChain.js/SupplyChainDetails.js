@@ -45,7 +45,7 @@ function SupplyChainDetails({setId,handleTabChange}) {
           style={{width: "100%", height: "100px",marginBottom: "20px"}}
         />
       </div>
-      <div className={'next-btn'}>
+      <div className = {'next-btn'}>
         <Button text={"Next Page"}  onClick={handleNext} />
       </div>     
     </div>
