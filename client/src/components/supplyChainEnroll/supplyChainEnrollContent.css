@@ -1,6 +1,7 @@
 .right-window{
     width: 75%;
-    height: 100vh;
+    min-height: 100vh;
+    height: max-content !important;
     float: right;
     background: #F7F7F7;
     display: flex;
@@ -8,11 +9,11 @@
 }
 .create-chain-container{
     width: 93%;
-    height: 93%;
+    min-height: 93%;
+    height: max-content !important;
     background-color: #fff;
     border-radius: 30px;
-    margin: auto;
-    margin-bottom : 20px;
+    margin: 20px auto;
     padding-bottom: 20px;
 }
 .tab-container{
