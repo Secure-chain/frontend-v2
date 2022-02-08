@@ -11,14 +11,15 @@ function TrackingContent() {
     const [batchID, setBatchID] = useState("")
     const [batchHistory, setBatchHistory] = useState([]);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         
     }
 
     return(
         <div className='right-window'>
             <div className='create-chain-container'>
-                <div className='input-container'>
+                <form className='input-container' onSubmit={handleSubmit}>
                     <div className='input-box'>
                         <Input placeholder='Product Number' style={{ width: '250px' }} />
                     </div>
@@ -31,7 +32,7 @@ function TrackingContent() {
                     <div className='input-box'>
                         <Button text='Track History' style={{ width: '150px' }} />
                     </div>
-                </div>
+                </form>
                 <ProductHistory/>
             </div>
         </div>
