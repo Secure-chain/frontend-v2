@@ -46,7 +46,7 @@ const SideNavItem = [
       },
       {
           title : 'Enroll in a Supply Chain',
-          path : '',
+          path : '/enroll',
           icon : <FaIcons.FaUserCircle/>
       }
     ]

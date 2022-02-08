@@ -6,8 +6,8 @@ function Content() {
 const [tab, setTab] = useState(1);
 const [id,setId] = useState(0);
   return (
-  <div className='right-window' style={tab == 2 ? {height : 'max-content', paddingTop : '10px'} : {height : 'max-content', paddingTop : '10px'}}>
-    <div className='create-chain-container' >
+  <div className='right-window'>
+    <div className='create-chain-container'>
         <div className='tab-container'>
             <div className='tab-group'>
                 <div className={tab === 1 ? 'tab-active' : 'tab'} onClick={() => setTab(1)}>1</div>
