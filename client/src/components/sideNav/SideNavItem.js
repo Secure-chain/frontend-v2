@@ -22,7 +22,7 @@ const SideNavItem = [
       },
       {
         title : 'Enrolled Supply Chains',
-        path : '',
+        path : '/dashboard/enrolledsupplychains',
         icon : <FaIcons.FaUserCircle/>
       },
       {
@@ -46,7 +46,7 @@ const SideNavItem = [
       },
       {
           title : 'Enroll in a Supply Chain',
-          path : '',
+          path : '/enroll',
           icon : <FaIcons.FaUserCircle/>
       }
     ]
