@@ -1,0 +1,16 @@
+.header-container{
+    width: 75%;
+    height: 130px;
+    float: right;
+    background: rgba(15, 82, 186, 0.2);
+}
+.header{
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 65px;
+    color: #000000;
+    margin: 37px;
+    opacity: 1;
+}
