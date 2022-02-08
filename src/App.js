@@ -6,24 +6,25 @@ import SideNav from './components/sideNav/SideNav'
 import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
 import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
+import ProductTracking from './pages/tracking/ProductTracking'
 function App() {
   return (
     <div>
       <Router>
         <NavBar/>
         <SideNav/>
-          <Switch>
+        <Switch>
           <Route exact path="/createEntity" component={CreateEntity}/>
           <Route exact path="/test" component={Playground}/>
-            <Route exact path="/dashboard/ownedsupplychains">
-              <OwnedSupplyChains/>
-            </Route>
-            <Route exact path="/dashboard/participationrequests">
-              <ParticipationRequests/>
-            </Route>
-          </Switch>
+          <Route exact path="/dashboard/ownedsupplychains">
+            <OwnedSupplyChains/>
+          </Route>
+          <Route exact path="/dashboard/participationrequests">
+            <ParticipationRequests/>
+          </Route>
+          <Route exact path="/tracking" component={ProductTracking}/>
+        </Switch>
       </Router>
-
     </div>
   )
 }
