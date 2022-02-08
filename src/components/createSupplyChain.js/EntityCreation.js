@@ -3,46 +3,9 @@ import axios from 'axios';
 import * as IoIcons from 'react-icons/io'
 import * as GrIcons from 'react-icons/gr'
 import './EntityCreation.css';
-import { AttributeInput } from './AddAttribute';
+import Playground from '../playground/Playground';
 import Button from '../common/button/Button';
-
-// const AttributeInput = ({initialName, initialType, index, AddFields, RemoveFields, length}) => {
-//   const [name, setName] = useState(initialName);
-//   const [type, setType] = useState(initialType);
-
-//   const handleAddFields  = () => {
-//     AddFields(name, type, index)
-//   }
-
-//   const handleRemoveFields = () => {
-//     RemoveFields(index)
-//   }
-//   return(
-//     <div className='attributes'>
-//       <div className='attributeName'>
-//         {console.log('hi' + index)}
-//         <h3>Attribute Name</h3>
-//         <input type = {'text'} onChange = {e => setName(e.target.value)}></input>
-//       </div>
-//       <div>
-//         <h3>Attribute Type</h3>
-//         <select onChange = {e => setType (e.target.value)}>
-//           <option value="none" selected disabled hidden>Select an Option</option>
-//         </select>
-//       </div>
-//       <div className='iconDelete'>
-//         <GrIcons.GrSubtractCircle disabled={length === 1} onClick={()=>RemoveFields(index)}/>
-//       </div>
-//       {console.log(index, length)}
-//       {index === length - 1?
-//       <div className='iconAdd'>
-//         <IoIcons.IoIosAddCircleOutline onClick={handleAddFields}/>
-//       </div>
-//       :null}
-//     </div>
-//   )
-// }
-
+import {AttributeInput} from './AddAttribute';
 function EntityCreation() {
   let templateId = 0;
   const [formkey, setFormkey] = useState(2);
@@ -52,6 +15,7 @@ function EntityCreation() {
     name: '',
     type: '',
   }])
+  const [flow, setFlow] = useState([])
   const [trigger, setTrigger] = useState(false)
   const [template, setTemplate] = useState({options : []})
   const [selectedTemplate, setSelectedTemplate] = useState({id : 0, templateName : '', attributes : []});
@@ -163,6 +127,14 @@ function EntityCreation() {
         console.log(data);
   }
 
+  /// callback for edge update of entities ( flow update )
+  const handleFlowUpdate = (source, destination) => {
+    let temp = [...flow];
+    // remove duplicate data from temp
+    temp = temp.filter(e => e.source !== source || e.destination !== destination);
+    temp.push({source: source, destination: destination});
+    setFlow(temp);
+  }
 
   return (
     <div className='entityCreationTop'>
@@ -216,6 +188,10 @@ function EntityCreation() {
       <div className='entityCreationBtn'>
         <Button text = {'Add Entity'} onClick={event => handleSubmit(event, entityName, tempSelectedTemplate, inputFields)}> </Button>
       </div>
+      <div className='create-entity-playground'>
+          <Playground style={{width:'100%',height:'200px'}}  entityArray={entityList} handleFlowUpdate={handleFlowUpdate}/>
+        </div>
+      
     </div>
   );
 }

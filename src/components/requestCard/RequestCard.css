@@ -1,0 +1,66 @@
+.request-card{
+    width: 92%;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top : 40px;
+    position: relative;
+    /* margin-bottom : 40px; */
+}
+.request-card-divider{
+    width : 95%;
+    border-top: 2px solid #C4C4C4;
+    /* display: flex; */
+    margin: auto;
+}
+.request-card-title{
+    font-weight: 800;
+    font-size: 28px;
+    margin-left: 40px;
+    margin-top: 20px;
+    margin-bottom:10px;
+}
+.request-card-date{
+    font-weight: 600;
+    color: #727272;
+    font-size: 16px;
+    margin-left: 40px;
+    margin-top:5px;
+    margin-bottom:15px;
+}
+.request-card-item{
+    font-weight: 600;
+    font-size: 18px;
+    margin-left: 40px;
+    margin-top:20px;
+    margin-bottom:10px;
+}
+.request-card-request{
+    display: flex; 
+    justify-content: space-between;
+}
+p{
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+.request-card-request-text{
+    font-weight: 600;
+    font-size: 22px;
+    margin-left: 40px;
+    margin-top:2%;
+    display: flex;
+    justify-content: left;
+}
+.request-card-accept{
+    display: flex;
+    justify-content: right;
+    margin-top:1.5%;
+}
+.request-card-reject{
+    display: flex;
+    justify-content: right;
+    margin-top:1.5%;
+    margin-right: 5%;
+}
