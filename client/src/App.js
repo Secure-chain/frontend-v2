@@ -9,6 +9,7 @@ import CreateEntity from './pages/entity/CreateEntity'
 import ProductTracking from './pages/tracking/ProductTracking'
 import SupplyChainManagement from "./contracts/SupplyChainManagement.json";
 import getWeb3 from "./getWeb3";
+import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
 function App() {
 
   const [account, setAccount] = useState('');
@@ -69,6 +70,9 @@ function App() {
           <Route exact path="/test" component={Playground}/>
           <Route exact path="/dashboard/ownedsupplychains">
             <OwnedSupplyChains/>
+          </Route>
+          <Route exact path="/dashboard/enrolledsupplychains">
+            <EnrolledSupplyChains/>
           </Route>
           <Route exact path="/dashboard/participationrequests">
             <ParticipationRequests/>
