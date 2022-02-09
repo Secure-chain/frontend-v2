@@ -4,7 +4,7 @@ import Content from '../../components/content/Content';
 function createEntity() {
   return (
   <div>
-    <Header title='Create Entity' />
+    <Header title='Create Supply Chain' />
     <Content />
   </div>
   );
