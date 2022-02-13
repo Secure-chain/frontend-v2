@@ -65,7 +65,7 @@ const SideNavItem = [
       },
       {
         title : 'Transfer Product',
-        path : '',
+        path : '/transfer',
         icon : <FaIcons.FaUserCircle/>
       }
     ]
