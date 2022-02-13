@@ -7,8 +7,20 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '../common/button/Button'
 import selectSupplyChain from './selectSupplyChain.css';
+import getSupplyChains from '../../APIcalls/CreateSupplyChain/getSupplyChains';
 
-function SelectSupplyChain({ handleTabChange }) {
+function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection }) {
+    const [supplyChainList, setSupplyChainList] = useState([]);
+    const [selectedSupplyChain, setSelectedSupplyChain] = useState('');
+    useEffect(() => {
+        getSupplyChains().then(res => {
+            setSupplyChainList(res.data);
+        })
+    },[]);
+
+    useEffect(() => {
+        console.log(selectedSupplyChain);
+    },[selectedSupplyChain])
     return(
         <div className='supply-chain'>
             <div className='picture'>
@@ -27,11 +39,18 @@ function SelectSupplyChain({ handleTabChange }) {
                                 id="demo-simple-select"
                                 value=""
                                 label="Age"
-                                onChange=""
-                            >
-                                <MenuItem value={10}>Krishna Supply Chain</MenuItem>
-                                <MenuItem value={20}>Akshat Supply Chain</MenuItem>
-                                <MenuItem value={30}>Anuj Supply Chain</MenuItem>
+                                onChange={(e) => {
+                                    setSelectedSupplyChain(e.target.value)
+                                    handleSupplyChainSelection(e.target.value)
+                                }}
+                                >
+                                {supplyChainList?.map(supplyChain => {
+                                    return (
+                                        <MenuItem value={supplyChain.id} key={supplyChain.id}>
+                                            {supplyChain.name}
+                                        </MenuItem>
+                                    )     
+                                })}
                             </Select>
                         </FormControl>
                     </Box>

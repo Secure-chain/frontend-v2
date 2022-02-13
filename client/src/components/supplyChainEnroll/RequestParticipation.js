@@ -5,11 +5,42 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { TextField } from '@mui/material';
 import Button from '../common/button/Button'
 import Input from '../../components/common/input/Input'
 import requestParticipation from './requestParticipation.css';
+import getEntitiesBySupplyChainId from '../../APIcalls/CreateSupplyChain/getEntitiesBySupplyChainId';
+import { getEntityData } from '../../APIcalls/CreateSupplyChain/getEntityData';
 
-function RequestParticipation() {
+function RequestParticipation({selectedSupplyChain}) {
+    const [ethAdd, setEthAdd] = useState('');
+    const [entityId, setEntityId] = useState('');
+    const [entities, setEntities] = useState([]);
+    const [entityData, setEntityData] = useState([]);
+    const [inputField, setInputField] = useState({});
+
+    useEffect(() => {
+        getEntitiesBySupplyChainId(selectedSupplyChain).then(res => {
+            setEntities(res.data);
+        })
+        console.log("request ke andar");
+    },[])
+
+    // useState(() => {
+    //     getEntityData(entityId).then(res => {
+    //         setEntityData(res.data);
+    //     })
+    // },[])
+
+    const handleInput = (e, id, index) => {
+        e.preventDefault();
+        setInputField({...inputField, [id]: e.target.value});
+    }
+
+    const handleChange = (event) => {
+        setEntityId(event.target.value);  
+    }
+
     return (
         <div className='supply-chain'>
             <div className='picture'>
@@ -18,7 +49,11 @@ function RequestParticipation() {
             <div className='content'>
 
                 <div className='input-text'>
-                    <Input placeholder='Ethereum Address' style={{ width: '300px'}} />
+                    <Input 
+                        placeholder='Ethereum Address' 
+                        style={{ width: '300px'}} 
+                        required
+                        onChange={e => setEthAdd(e.target.value)}/>
                 </div>
 
                 <div className='select-box'>
@@ -26,20 +61,43 @@ function RequestParticipation() {
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Select Role</InputLabel>
                             <Select
+                                required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
+                                name="role"
                                 value=""
-                                label="Age"
-                                onChange=""
+                                label="Role"
+                                onChange={handleChange}
                             >
-                                <MenuItem value={10}>Manufacturer</MenuItem>
-                                <MenuItem value={20}>Distributor</MenuItem>
-                                <MenuItem value={30}>Transporter</MenuItem>
+                                <MenuItem value="Choose">Choose</MenuItem>
+                                {entities.map(entity => {
+                                    return (
+                                        <MenuItem value={entity.id} key={entity.id}>
+                                            {entity.name}
+                                        </MenuItem>
+                                    )     
+                                })}
                             </Select>
                         </FormControl>
                     </Box>
                 </div>
 
+                {/* {entityData.generic_attributes && entityData.generic_attributes.map((attribute, index) => {
+                    return(
+                        <div className="enroll__formgroup" key={attribute.id}>
+                        <TextField
+                            required
+                            name={attribute.name}
+                            label={attribute.name}
+                            className="enroll__input"
+                            placeholder={attribute.name}
+                            onChange={(e) => {
+                                handleInput(e, attribute.id, index);
+                            }}
+                        />
+                    </div>
+                    )
+                })} */}
                 <div className='select-box'>
                     <Box sx={{ minWidth: 300 }}>
                         <FormControl fullWidth>
