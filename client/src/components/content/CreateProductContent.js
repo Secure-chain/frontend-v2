@@ -4,11 +4,12 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { useHistory } from 'react-router';
+import Button from '../common/button/Button';
+import { initObject } from "../../components/initVariables/initObject"
 
-
-const CreateProductContent = ({addProduct, currentBatchesInOwnership}) => {
-    let token = localStorage.getItem("token");
-    let username = localStorage.getItem("username");
+const CreateProduct = ({addProduct, currentBatchesInOwnership}) => {
+    let token = initObject().token;
+    let username = 'gaurkrishna498@gmail.com';
 
     const [supplyChain, setSupplyChain] = useState([]);
     const [productSupplyChain, setProductSupplyChain] = useState("");
@@ -65,15 +66,14 @@ const CreateProductContent = ({addProduct, currentBatchesInOwnership}) => {
         setIssubmit(!issubmit)
     }
     return(
-        <div className="createsupply__bottom">
-            <h1 className = "createsupply__bottom__head">Create Product</h1>
+        <div className="right-window">
             <div className = "createproduct">
-                <div className = "createproduct__big-card">
                 <div className="createproduct__row">
                     <form className="createproduct__column" onSubmit={handleSubmit}>
                         <div className="createproduct__form-group">
-                            <label className="createproduct__label">Select Supply Chain : </label>
+                            <label className="createproduct__bigLabel" >Select Supply Chain : </label>
                             <select className="createproduct__input"
+                                style={{marginTop:'20px'}}
                                 name="supplyChains"
                                 id="supplyChains"
                                 onChange={(e) => { setProductSupplyChain(e.target.value) }}
@@ -119,19 +119,19 @@ const CreateProductContent = ({addProduct, currentBatchesInOwnership}) => {
                             />
                         </div>
                         
-                        <button className="createproduct__button" type="submit" >Add Product</button>
+                        <Button className="createproduct__button" text="Add Product" type='submit' onClick={handleSubmit}></Button>
 
                         
                     </form>
-                    <div className="createproduct__column">
+                    <div className="createproduct__column" style={{display:'flex',alignItems:'center',justifyContent:'ce'}}>
                         <div className="createproduct__column__image" style={{ backgroundImage: `url(media/create.jpg)` }}>
 
                     </div>
                         </div>
-                </div>
+                
                 </div>
             </div>
         </div>
     )
 }    
-export default CreateProductContent
+export default CreateProduct
