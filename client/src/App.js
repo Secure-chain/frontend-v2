@@ -79,11 +79,26 @@ function App() {
     })
   }
 
+  // function to request the transfer of batches of a product
   requestTransfer = (productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp) => {
     setLoading(true)
     contract.methods.requestTransfer(productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
     })
+  }
+
+  // function to get the current no. of batches of a product in ownership
+  currentBatchesInOwnership = (productNo, supplyChainId) => {
+    const batches = contract.methods.batchesInOwnership(productNo, account).call()
+    console.log("bathches", batches)
+    return batches;
+  }
+
+  // function to get the current no. of units of a product in ownership
+  currentUnitsInOwnership = async (productNo, supplyChainId) => {
+    const units = contract.methods.currentUnitsInOwnership(productNo, supplyChainId).call();
+    console.log("units", units)
+    return units;
   }
 
   return (
