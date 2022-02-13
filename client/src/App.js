@@ -62,10 +62,19 @@ function App() {
     setup();
   }, [])
 
+  // function to add new product
   addProduct = (productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp) => {
     setLoading(true)
     console.log(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp, this.state.account)
     contract.methods.addProduct(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
+      setLoading(false)
+    })
+  }
+
+  // fuunction to transfer batches of a product
+  transferProduct = (productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId) => {
+    setLoading(true)
+    contract.methods.transferProduct(productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
     })
   }
