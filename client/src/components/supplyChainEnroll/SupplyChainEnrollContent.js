@@ -7,6 +7,9 @@ function SupplyChainEnrollContent() {
     const [tab, setTab] = useState(1);
     const [selectedSupplyChain, setSelectedSupplyChain] = useState(0);
     const [entities, setEntities] = useState([]);
+    const changeTab = (tab) => {
+        setTab(tab);
+    }
     return (
         <div className='right-window'>
             <div className='create-chain-container' >
@@ -24,7 +27,7 @@ function SupplyChainEnrollContent() {
                 <div className='tab-content'>
                     {tab === 1 &&
                         <SelectSupplyChain
-                            handleSupplyChainSelection={(id) =>  setSelectedSupplyChain(id)}
+                            handleSupplyChainSelection={(id) =>  {console.log(id); setSelectedSupplyChain(id)}}
                             handleTabChange={(data) => setTab(data)}
                         />}
                     {tab === 2 && <RequestParticipation 

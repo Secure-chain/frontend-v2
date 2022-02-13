@@ -9,7 +9,7 @@ import { TextField } from '@mui/material';
 import Button from '../common/button/Button'
 import Input from '../../components/common/input/Input'
 import requestParticipation from './requestParticipation.css';
-import getEntitiesBySupplyChainId from '../../APIcalls/CreateSupplyChain/getEntitiesBySupplyChainId';
+import { getEntitiesBySupplyChainId } from '../../APIcalls/CreateSupplyChain/getEntitiesBySupplyChainId';
 import { getEntityData } from '../../APIcalls/CreateSupplyChain/getEntityData';
 
 function RequestParticipation({selectedSupplyChain}) {
@@ -20,10 +20,11 @@ function RequestParticipation({selectedSupplyChain}) {
     const [inputField, setInputField] = useState({});
 
     useEffect(() => {
+        console.log(selectedSupplyChain);
         getEntitiesBySupplyChainId(selectedSupplyChain).then(res => {
+            console.log("getEntitiesBySupplyChainId res ",res);
             setEntities(res.data);
         })
-        console.log("request ke andar");
     },[])
 
     // useState(() => {
@@ -31,6 +32,8 @@ function RequestParticipation({selectedSupplyChain}) {
     //         setEntityData(res.data);
     //     })
     // },[])
+
+
 
     const handleInput = (e, id, index) => {
         e.preventDefault();
@@ -67,13 +70,13 @@ function RequestParticipation({selectedSupplyChain}) {
                                 name="role"
                                 value=""
                                 label="Role"
-                                onChange={handleChange}
+                                onChange={(e)=>handleChange(e)}
                             >
                                 <MenuItem value="Choose">Choose</MenuItem>
-                                {entities.map(entity => {
+                                {entities?.map(entity => {console.log('entity',entity);
                                     return (
                                         <MenuItem value={entity.id} key={entity.id}>
-                                            {entity.name}
+                                            {entity.entity_name}
                                         </MenuItem>
                                     )     
                                 })}
@@ -107,7 +110,7 @@ function RequestParticipation({selectedSupplyChain}) {
                                 id="demo-simple-select"
                                 value=""
                                 label="Age"
-                                onChange=""
+                                onChange={(e)=>handleChange(e)}
                             >
                                 <MenuItem value={10}>Krishna Supply Chain</MenuItem>
                                 <MenuItem value={20}>Akshat Supply Chain</MenuItem>
@@ -126,7 +129,7 @@ function RequestParticipation({selectedSupplyChain}) {
                                 id="demo-simple-select"
                                 value=""
                                 label="Age"
-                                onChange=""
+                                onChange={(e)=>handleChange(e)}
                             >
                                 <MenuItem value={10}>Krishna</MenuItem>
                                 <MenuItem value={20}>Akshat</MenuItem>

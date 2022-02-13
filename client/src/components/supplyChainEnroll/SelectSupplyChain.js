@@ -9,18 +9,19 @@ import Button from '../common/button/Button'
 import selectSupplyChain from './selectSupplyChain.css';
 import getSupplyChains from '../../APIcalls/CreateSupplyChain/getSupplyChains';
 
-function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection }) {
+function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection, changeTab }) {
     const [supplyChainList, setSupplyChainList] = useState([]);
-    const [selectedSupplyChain, setSelectedSupplyChain] = useState('');
+    const [selectedSupplyChain, setSelectedSupplyChain] = useState({
+        id: 0,
+        name:'Select Supply Chain',
+    });
+    const [selectedSupplyChainId, setSelectedSupplyChainId] = useState();
     useEffect(() => {
         getSupplyChains().then(res => {
             setSupplyChainList(res.data);
         })
     },[]);
 
-    useEffect(() => {
-        console.log(selectedSupplyChain);
-    },[selectedSupplyChain])
     return(
         <div className='supply-chain'>
             <div className='picture'>
@@ -37,11 +38,13 @@ function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection }) {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value=""
-                                label="Age"
+                                value={selectedSupplyChain.id}
+                                label="Select Supply Chain"
                                 onChange={(e) => {
-                                    setSelectedSupplyChain(e.target.value)
+                                    console.log(e.target.value);
+                                    setSelectedSupplyChainId(e.target.value)
                                     handleSupplyChainSelection(e.target.value)
+                                    setSelectedSupplyChain(supplyChainList.filter(supplyChain => supplyChain.id === e.target.value)[0])
                                 }}
                                 >
                                 {supplyChainList?.map(supplyChain => {
@@ -56,7 +59,7 @@ function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection }) {
                     </Box>
                 </div>
                 <div className="select-btn">
-                    <Button text='Continue' />
+                    <Button text='Continue' onClick={(e)=>handleTabChange(2)} />
                 </div>
             </div>
         </div>
