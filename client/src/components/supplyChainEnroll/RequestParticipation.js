@@ -20,9 +20,7 @@ function RequestParticipation({selectedSupplyChain}) {
     const [inputField, setInputField] = useState({});
 
     useEffect(() => {
-        console.log(selectedSupplyChain);
         getEntitiesBySupplyChainId(selectedSupplyChain).then(res => {
-            console.log("getEntitiesBySupplyChainId res ",res);
             setEntities(res.data);
         })
     },[])
