@@ -62,6 +62,14 @@ function App() {
     setup();
   }, [])
 
+  addProduct = (productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp) => {
+    setLoading(true)
+    console.log(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp, this.state.account)
+    contract.methods.addProduct(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
+      setLoading(false)
+    })
+  }
+
   return (
     <div>
       <Router>
