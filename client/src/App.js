@@ -79,6 +79,13 @@ function App() {
     })
   }
 
+  requestTransfer = (productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp) => {
+    setLoading(true)
+    contract.methods.requestTransfer(productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
+      setLoading(false)
+    })
+  }
+
   return (
     <div>
       <Router>
