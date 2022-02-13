@@ -12,6 +12,7 @@ import SupplyChainManagement from "./contracts/SupplyChainManagement.json"
 import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
 import TransferProduct from "./pages/transfer/TransferProduct.js"
 import getWeb3 from "./getWeb3"
+import CreateProduct from './pages/product/CreateProduct'
 function App() {
 
   const [account, setAccount] = useState('');
@@ -82,6 +83,7 @@ function App() {
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
           <Route exact path="/transfer" component={TransferProduct} />
           <Route exact path="/tracking" component={ProductTracking}/>
+          <Route exact path="/createProduct" component={CreateProduct}/>
         </Switch>
       </Router>
     </div>
