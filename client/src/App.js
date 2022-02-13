@@ -8,9 +8,10 @@ import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 import ProductTracking from './pages/tracking/ProductTracking'
 import EnrollInSupplyChain from './pages/enrollInSupplyChain/EnrollInSupplyChain'
-import SupplyChainManagement from "./contracts/SupplyChainManagement.json";
-import getWeb3 from "./getWeb3";
+import SupplyChainManagement from "./contracts/SupplyChainManagement.json"
 import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
+import TransferProduct from "./pages/transfer/TransferProduct.js"
+import getWeb3 from "./getWeb3"
 function App() {
 
   const [account, setAccount] = useState('');
@@ -79,6 +80,7 @@ function App() {
             <ParticipationRequests/>
           </Route>
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
+          <Route exact path="/transfer" component={TransferProduct} />
           <Route exact path="/tracking" component={ProductTracking}/>
         </Switch>
       </Router>
