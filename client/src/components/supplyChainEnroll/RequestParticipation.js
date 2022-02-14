@@ -57,8 +57,7 @@ function RequestParticipation({selectedSupplyChain}) {
     },[])
 
     useEffect(() => {
-        console.log(mySelectedSupplyChainId);
-        getEntitiesBySupplyChainId(mySelectedSupplyChainId).then(res => {
+        mySelectedSupplyChainId &&  getEntitiesBySupplyChainId(mySelectedSupplyChainId).then(res => {
             setMySupplyChainEntities(res.data);
         })
     } ,[mySelectedSupplyChain])
@@ -100,6 +99,9 @@ function RequestParticipation({selectedSupplyChain}) {
             }
         })
     }
+    useEffect(() => {
+        console.log('mySupplyChainEntities', mySupplyChainEntities);
+    },[mySupplyChainEntities])
 
     return (
         <div className='supply-chain'>
@@ -207,6 +209,7 @@ function RequestParticipation({selectedSupplyChain}) {
                                 }}
                             >
                                 {mySupplyChainEntities.map(entity => {
+                                    console.log('entities in map ',entity);
                                     return (
                                         <MenuItem value={entity.id} key={entity.id}>
                                             {entity.entity_name}

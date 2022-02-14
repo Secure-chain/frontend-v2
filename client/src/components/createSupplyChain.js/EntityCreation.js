@@ -10,7 +10,9 @@ import { postFlowArray } from '../../APIcalls/CreateSupplyChain/postFlowArray';
 import { initObject } from '../initVariables/initObject';
 import { getTemplate } from '../../APIcalls/CreateSupplyChain/getTemplate';
 import { getTemplateById } from '../../APIcalls/CreateSupplyChain/getTemplateById';
+import { useHistory } from "react-router-dom";
 function EntityCreation({ supplyChain }) {
+  const history = useHistory();
   let templateId = 0;
   const [formkey, setFormkey] = useState(2);
   const [entityName, setEntityName] = useState('')
@@ -110,7 +112,11 @@ function EntityCreation({ supplyChain }) {
 
 /// Submit flow data to backend
 const handleSubmitFlow = () => {
-  postFlowArray(flow);
+  postFlowArray(flow)
+  .then(res => {
+    console.log(res)
+    history.push('/ownedsupplychains');
+  })
   setFlow([]);
 }
 
