@@ -1,4 +1,4 @@
-import { initObject } from "../../components/initVariables/initObject"
+import { initObject } from "../components/initVariables/initObject"
 import axios from "axios"
 export const postSupplyChainDetails = async(data) => {
      try{

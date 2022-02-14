@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { initObject } from '../../components/initVariables/initObject'
+import { initObject } from '../components/initVariables/initObject'
 const getMySupplyChains = async() => {
     try{
         const response = await axios.get(`${initObject().initVariables}/mysupplychain/`, {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from '../common/input/Input'
 import Button from '../common/button/Button';
 import './supplyChainDetails.css';
-import { postSupplyChainDetails } from '../../APIcalls/CreateSupplyChain/postSupplyChainDetails';
+import { postSupplyChainDetails } from '../../APIcalls/postSupplyChainDetails';
 
 function SupplyChainDetails({setId, handleTabChange, setSupplyChain}) {
   const [supplyChainDetails, setSupplyChainDetails] = useState({

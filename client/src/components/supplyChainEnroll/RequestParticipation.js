@@ -10,10 +10,10 @@ import { TextField } from '@mui/material';
 import Button from '../common/button/Button'
 import Input from '../../components/common/input/Input'
 import requestParticipation from './requestParticipation.css';
-import getEntitiesBySupplyChainId  from '../../APIcalls/CreateSupplyChain/getEntitiesBySupplyChainId';
-import getEntityData  from '../../APIcalls/CreateSupplyChain/getEntityData';
-import getMySupplyChains from '../../APIcalls/CreateSupplyChain/getMySupplyChains';
-import enrollRequest from '../../APIcalls/CreateSupplyChain/enrollRequest';
+import getEntitiesBySupplyChainId  from '../../APIcalls/getEntitiesBySupplyChainId';
+import getEntityData  from '../../APIcalls/getEntityData';
+import getMySupplyChains from '../../APIcalls/getMySupplyChains';
+import enrollRequest from '../../APIcalls/enrollRequest';
 
 function RequestParticipation({selectedSupplyChain}) {
     let history = useHistory();

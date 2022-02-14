@@ -6,10 +6,10 @@ import './EntityCreation.css';
 import Playground from '../playground/Playground';
 import Button from '../common/button/Button';
 import {AttributeInput} from './AddAttribute';
-import { postFlowArray } from '../../APIcalls/CreateSupplyChain/postFlowArray';
+import { postFlowArray } from '../../APIcalls/postFlowArray';
 import { initObject } from '../initVariables/initObject';
-import { getTemplate } from '../../APIcalls/CreateSupplyChain/getTemplate';
-import { getTemplateById } from '../../APIcalls/CreateSupplyChain/getTemplateById';
+import { getTemplate } from '../../APIcalls/getTemplate';
+import { getTemplateById } from '../../APIcalls/getTemplateById';
 import { useHistory } from "react-router-dom";
 function EntityCreation({ supplyChain }) {
   const history = useHistory();

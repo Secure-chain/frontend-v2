@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '../common/button/Button'
 import selectSupplyChain from './selectSupplyChain.css';
-import getSupplyChains from '../../APIcalls/CreateSupplyChain/getSupplyChains';
+import getSupplyChains from '../../APIcalls/getSupplyChains';
 
 function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection, changeTab }) {
     const [supplyChainList, setSupplyChainList] = useState([]);

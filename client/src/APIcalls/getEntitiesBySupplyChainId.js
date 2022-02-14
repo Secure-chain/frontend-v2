@@ -1,5 +1,5 @@
 import React from 'react'
-import { initObject } from "../../components/initVariables/initObject"
+import { initObject } from "../components/initVariables/initObject"
 import axios from "axios"
 
 const getEntitiesBySupplyChainId = async(supplyChain) => {
