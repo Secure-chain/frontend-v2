@@ -38,7 +38,7 @@ function App() {
       const deployedNetwork = SupplyChainManagement.networks[networkId];
       const contract = new web3.eth.Contract(
         SupplyChainManagement.abi,
-        "0x9331eEb6b5a3080E8F3ad08d946865a7127CDf75",
+        "0x6151829A7927745Df986664Bcd72C4824d19f12e",
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -64,16 +64,16 @@ function App() {
   }, [])
 
   // function to add new product
-  addProduct = (productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp) => {
+  const addProduct = async (productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp) => {
     setLoading(true)
-    console.log(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp, this.state.account)
+    console.log(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp, account)
     contract.methods.addProduct(productNo, productName, noOfBatches, unitsPerBatch, supplyChainId, ownerName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
     })
   }
 
   // fuunction to transfer batches of a product
-  transferProduct = (productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId) => {
+  const transferProduct = async (productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId) => {
     setLoading(true)
     contract.methods.transferProduct(productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
@@ -81,7 +81,7 @@ function App() {
   }
 
   // function to request the transfer of batches of a product
-  requestTransfer = (productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp) => {
+  const requestTransfer = async (productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp) => {
     setLoading(true)
     contract.methods.requestTransfer(productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
@@ -89,14 +89,14 @@ function App() {
   }
 
   // function to get the current no. of batches of a product in ownership
-  currentBatchesInOwnership = (productNo, supplyChainId) => {
+  const currentBatchesInOwnership = async (productNo, supplyChainId) => {
     const batches = contract.methods.batchesInOwnership(productNo, account).call()
     console.log("bathches", batches)
     return batches;
   }
 
   // function to get the current no. of units of a product in ownership
-  currentUnitsInOwnership = async (productNo, supplyChainId) => {
+  const currentUnitsInOwnership = async (productNo, supplyChainId) => {
     const units = contract.methods.currentUnitsInOwnership(productNo, supplyChainId).call();
     console.log("units", units)
     return units;
@@ -122,7 +122,12 @@ function App() {
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
           <Route exact path="/transfer" component={TransferProduct} />
           <Route exact path="/tracking" component={ProductTracking}/>
-          <Route exact path="/createProduct" component={CreateProduct}/>
+          <Route exact path="/createProduct">
+            <CreateProduct
+              addProduct={addProduct}
+              // currentBatchesInOwnership={currentBatchesInOwnership}
+            />
+          </Route>
         </Switch>
       </Router>
     </div>

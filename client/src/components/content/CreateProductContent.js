@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import Button from '../common/button/Button';
 import { initObject } from "../../components/initVariables/initObject"
 
-const CreateProduct = ({addProduct, currentBatchesInOwnership}) => {
+const CreateProduct = ({addProduct}) => {
     let token = initObject().token;
     let username = 'gaurkrishna498@gmail.com';
 
@@ -39,16 +39,16 @@ const CreateProduct = ({addProduct, currentBatchesInOwnership}) => {
             })
     }, [])
 
-    useEffect(() => {
-        if(issubmit){
-            let today = new Date();
-            let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            let dateTime = date + '_' + time;
-            let productNo = productName + '_' + productSupplyChain + '_' + dateTime;
-            console.log(currentBatchesInOwnership(productNo, parseInt(productSupplyChain)))
-        }
-    }, [issubmit])
+    // useEffect(() => {
+    //     if(issubmit){
+    //         let today = new Date();
+    //         let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    //         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    //         let dateTime = date + '_' + time;
+    //         let productNo = productName + '_' + productSupplyChain + '_' + dateTime;
+    //         console.log(currentBatchesInOwnership(productNo, parseInt(productSupplyChain)))
+    //     }
+    // }, [issubmit])
 
     const handleSubmit = (e) => {
         e.preventDefault();
