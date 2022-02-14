@@ -2,7 +2,6 @@ import React from 'react'
 import './CreateProduct.scss'
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Web3 from 'web3';
 import { useHistory } from 'react-router';
 import Button from '../common/button/Button';
 import { initObject } from "../../components/initVariables/initObject"
