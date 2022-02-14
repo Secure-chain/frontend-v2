@@ -1,95 +1,245 @@
-import React, { useState, useEffect } from 'react'
-import TransferProductPhoto from '../../media/transferPhoto.png'
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Button from '../common/button/Button'
-import Input from '../../components/common/input/Input'
-import transferProductContent from './transferProductContent.css';
+import React from 'react'
+import axios from 'axios';
+import './TransferProductContent.scss'
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import useEnhancedEffect from '@mui/utils/useEnhancedEffect';
+import Button from '../common/button/Button';
+import { initObject } from "../../components/initVariables/initObject"
 
-function TransferProductContent() {
+const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatchesInOwnership, currentUnitsInOwnership, transferProduct, requestTransfer }) => {
+    let supplychainid = -1;
+    let token = initObject().token;
+    let username = 'gaurkrishna498@gmail.com';
+
+    const [supplyChain, setSupplyChain] = useState([]);
+    const [fields, setFields] = useState([]);
+    const [allowedRecievers, setAllowedRecievers] = useState([]);
+    const [transferSupplyChain, setTransferSupplyChain] = useState("");
+    const [transferInstance, setTransferInstance] = useState("");
+    const [transferUnits, setTransferUnits] = useState("");
+    const [products, setProducts] = useState([]);
+    const [productNo, setProductNo] = useState("");
+    const [batchesInOwnership, setBatchesInOwnership] = useState("");
+    const [unitsInOwnership, setUnitsInOwnership] = useState("");
+    const [transferToState, setTransferToState] = useState("");
+
+    useEffect(() => {
+        if (productNo !== "") {
+            currentBatchesInOwnership(productNo, parseInt(transferSupplyChain)).then(res => {
+                setBatchesInOwnership(res);
+            })
+            currentUnitsInOwnership(productNo, parseInt(transferSupplyChain)).then(res => {
+                setUnitsInOwnership(res);
+            })
+        }
+    }, [productNo])
+
+    useEffect(() => {
+        if (transferSupplyChain !== "") {
+            productsInSupplyChain(parseInt(transferSupplyChain)).then(res => {
+                console.log("Transfer ke andar", res)
+                setProducts(res);
+            })
+
+        }
+    }, [transferSupplyChain])
+
+
+    useEffect(() => {
+        axios
+            .get('https://securechain-backend.herokuapp.com/enrolledsupplychain/',
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                }
+            )
+            .then((res) => {
+                if (res) {
+                    setSupplyChain(res.data);
+                    console.log(res.data)
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        // axios
+        //     .get('https://securechain-backend.herokuapp.com/allowedreceivers/',
+        //         {
+        //             headers: {
+        //                 Authorization: `Token ${token}`
+        //             }
+        //         }
+        //     )
+        //     .then((res) => {
+        //         if (res) {
+        //             setAllowedRecievers(res.data);
+        //             console.log(res.data)
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log(err)
+        //     })
+    }, [])
+    function handleAdd() {
+        const values = [...fields];
+        values.push({ value: null });
+        setFields(values);
+    }
+
+
+    useEffect(() => {
+        console.log(supplyChain)
+    }, [supplyChain])
+
+    const handleRecievers = (e) => {
+        handleAdd();
+        supplychainid = e.target.value;
+        console.log(supplychainid)
+        setTransferSupplyChain(e.target.value)
+        axios
+            .get('https://securechain-backend.herokuapp.com/allowedreceivers/' + supplychainid + '/',
+                {
+                    headers: {
+                        Authorization: `Token ${token}`
+                    }
+                }
+            )
+            .then((res) => {
+                if (res) {
+                    setAllowedRecievers(res.data);
+                    console.log(res.data)
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    };
+
+    const handleProducts = (e) => {
+        setProductNo(e.target.value)
+        console.log(productNo);
+        // setBatchesInOwnership(currentBatchesInOwnership(productNo, parseInt(transferSupplyChain)));
+        // setUnitsInOwnership(currentUnitsInOwnership(productNo, parseInt(transferSupplyChain)));
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let dateTime = date + '_' + time;
+        const productName = getProductName(productNo);
+        console.log(transferInstance);
+        console.log(transferToState);
+        requestTransfer(productNo, productName, parseInt(transferUnits), parseInt(transferSupplyChain), username, transferInstance, transferToState, dateTime);
+    }
+
+
+    const handleSelectedReciever = (e) => {
+        let ethereum_add = e.target.value;
+        const receiver = allowedRecievers.filter(receiver => receiver.ethereum_address === ethereum_add)[0]
+        setTransferInstance(ethereum_add)
+        setTransferToState(receiver.name)
+    }
+
 
     return (
-        <div className='right-window'>
-            <div className='create-chain-container'>
-                <div className='transfer'>
-                    <div className='transfer-picture'>
-                        <img src={TransferProductPhoto} alt='' width="350" height="300" />
-                    </div>
-
-                    <div className='transfer-content'>
-
-                        <div className='transfer-box'>
-                            <Box sx={{ minWidth: 300 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Supply Chain</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value=""
-                                        label="Age"
-                                        onChange=""
-                                    >
-                                        <MenuItem value={10}>milk supply chain</MenuItem>
-                                        <MenuItem value={20}>milk supply chain</MenuItem>
-                                        <MenuItem value={30}>milk supply chain</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
+        <div className="right-window">
+            <div className="transferproduct">
+                <div class="transferproduct__row">
+                    <form class="transferproduct__column" onSubmit={handleSubmit}>
+                        {supplyChain &&
+                            <div className="transferproduct__form-group">
+                                <label className="transferproduct__label">Select Supply Chain : </label>
+                                <select
+                                    className="transferproduct__input"
+                                    name="supplyChains"
+                                    id="supplyChains"
+                                    onChange={handleRecievers}
+                                >
+                                    <option value="">
+                                        Choose
+                                    </option>
+                                    {supplyChain.map((supplychain) => {
+                                        return (
+                                            <option key={supplychain.id} value={supplychain.id}>
+                                                {supplychain.name}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                        }
+                        {products &&
+                            <div className="transferproduct__form-group">
+                                <label className="transferproduct__label">Select Product : </label>
+                                <select
+                                    className="transferproduct__input"
+                                    name="product"
+                                    id="product"
+                                    //onChange={(e) => setProductNo(e.target.value)}
+                                    onChange={handleProducts}
+                                >
+                                    <option value="">
+                                        Choose
+                                    </option>
+                                    {products.map((product) => {
+                                        return (
+                                            <option key={product.productNo} value={product.productNo}>
+                                                {product.productNo}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                        }
+                        {batchesInOwnership &&
+                            <div>
+                                <h2 className="transferproduct__title">Batches in Ownership:- {batchesInOwnership}</h2>
+                            </div>
+                        }
+                        {unitsInOwnership &&
+                            <h1 className="transferproduct__title">Units per Batch:- {unitsInOwnership}</h1>
+                        }
+                        <h1 className="transferproduct__title">Reciever's Details</h1>
+                        <div className="transferproduct__form-group">
+                            <label className="transferproduct__label">Select Receiver : </label>
+                            <select
+                                className="transferproduct__input"
+                                name="receiver"
+                                id="receiver"
+                                onChange={(e) => handleSelectedReciever(e)}
+                            >
+                                <option>Choose</option>
+                                {allowedRecievers.map((allowed) => {
+                                    return (
+                                        <option key={allowed.ethereum_address} value={allowed.ethereum_address} >
+                                            {allowed.name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
                         </div>
-
-                        <div className='transfer-box'>
-                            <Box sx={{ minWidth: 300 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Product</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value=""
-                                        label="Age"
-                                        onChange=""
-                                    >
-                                        <MenuItem value={10}>Milk</MenuItem>
-                                        <MenuItem value={20}>Glass</MenuItem>
-                                        <MenuItem value={30}>Wood</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
+                        <div className="transferproduct__form-group">
+                            <label className="transferproduct__label">Batches to be transferred : </label>
+                            <input className="transferproduct__input"
+                                name="unit"
+                                type="number"
+                                id="unit"
+                                onChange={(e) => { setTransferUnits(e.target.value) }}
+                            />
                         </div>
-
-                        <div className='transfer-box'>
-                            <Box sx={{ minWidth: 300 }}>
-                                <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">Select Receiver</InputLabel>
-                                    <Select
-                                        labelId="demo-simple-select-label"
-                                        id="demo-simple-select"
-                                        value=""
-                                        label="Age"
-                                        onChange=""
-                                    >
-                                        <MenuItem value={10}>Krishna</MenuItem>
-                                        <MenuItem value={20}>Akshat</MenuItem>
-                                        <MenuItem value={30}>Anuj</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
-                        </div>
-
-                        <div className='input-box'>
-                            <Input placeholder='Product Number' type='number' style={{ width: '300px' }} />
-                        </div>
-
-                        <div className='transfer-btn'>
-                            <Button text='Request Transfer' style={{ width: '200px' }} />
+                        <Button className="transferproduct__button" type="submit" text="Request Transfer" onClick={handleSubmit} />
+                    </form>
+                    <div className="transferproduct__column" style={{ display: 'flex', alignItems: 'center', justifyContent: 'ce' }}>
+                        <div className="transferproduct__column__image" style={{ backgroundImage: `url(media/transfer1.jpg)` }}>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
-
-export default TransferProductContent;
+export default TransferProduct

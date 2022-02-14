@@ -60,7 +60,7 @@ const SideNavItem = [
     subNav : [
       {
         title : 'Create Product',
-        path : '',
+        path : '/createProduct',
         icon : <FaIcons.FaUserCircle/>
       },
       {
