@@ -33,7 +33,7 @@ function EnrolledSupplyChains() {
     <div>
         <Header title='Enrolled Supply Chains' /> 
         <div className='right-window'>
-            {enrolledsupplychain.map((supplychain)=>{
+            {enrolledsupplychain.map((supplychain, key)=>{
                 return(
                     <SupplyChainCard 
                     title={supplychain.name}

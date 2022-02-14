@@ -7,8 +7,21 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '../common/button/Button'
 import selectSupplyChain from './selectSupplyChain.css';
+import getSupplyChains from '../../APIcalls/CreateSupplyChain/getSupplyChains';
 
-function SelectSupplyChain({ handleTabChange }) {
+function SelectSupplyChain({ handleTabChange, handleSupplyChainSelection, changeTab }) {
+    const [supplyChainList, setSupplyChainList] = useState([]);
+    const [selectedSupplyChain, setSelectedSupplyChain] = useState({
+        id: 0,
+        name:'Select Supply Chain',
+    });
+    const [selectedSupplyChainId, setSelectedSupplyChainId] = useState();
+    useEffect(() => {
+        getSupplyChains().then(res => {
+            setSupplyChainList(res.data);
+        })
+    },[]);
+
     return(
         <div className='supply-chain'>
             <div className='picture'>
@@ -25,19 +38,28 @@ function SelectSupplyChain({ handleTabChange }) {
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value=""
-                                label="Age"
-                                onChange=""
-                            >
-                                <MenuItem value={10}>Krishna Supply Chain</MenuItem>
-                                <MenuItem value={20}>Akshat Supply Chain</MenuItem>
-                                <MenuItem value={30}>Anuj Supply Chain</MenuItem>
+                                value={selectedSupplyChain.id}
+                                label="Select Supply Chain"
+                                onChange={(e) => {
+                                    console.log(e.target.value);
+                                    setSelectedSupplyChainId(e.target.value)
+                                    handleSupplyChainSelection(e.target.value)
+                                    setSelectedSupplyChain(supplyChainList.filter(supplyChain => supplyChain.id === e.target.value)[0])
+                                }}
+                                >
+                                {supplyChainList?.map(supplyChain => {
+                                    return (
+                                        <MenuItem value={supplyChain.id} key={supplyChain.id}>
+                                            {supplyChain.name}
+                                        </MenuItem>
+                                    )     
+                                })}
                             </Select>
                         </FormControl>
                     </Box>
                 </div>
                 <div className="select-btn">
-                    <Button text='Continue' />
+                    <Button text='Continue' onClick={(e)=>handleTabChange(2)} />
                 </div>
             </div>
         </div>
