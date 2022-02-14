@@ -20,6 +20,8 @@ function App() {
   const [accounts, setAccounts] = useState([]);
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [productsCount, setProductsCount] = useState('')
+  const [products, setProducts] = useState([])
 
   const setup = async () => {
     try {
@@ -90,16 +92,40 @@ function App() {
 
   // function to get the current no. of batches of a product in ownership
   const currentBatchesInOwnership = async (productNo, supplyChainId) => {
-    const batches = contract.methods.batchesInOwnership(productNo, account).call()
+    const batches = await contract.methods.batchesInOwnership(productNo, account).call()
     console.log("bathches", batches)
     return batches;
   }
 
   // function to get the current no. of units of a product in ownership
   const currentUnitsInOwnership = async (productNo, supplyChainId) => {
-    const units = contract.methods.currentUnitsInOwnership(productNo, supplyChainId).call();
+    const units = await contract.methods.currentUnitsInOwnership(productNo, supplyChainId).call();
     console.log("units", units)
     return units;
+  }
+
+  getProductName = async (productNo) => {
+    const productName = await contract.methods.getProductName(productNo).call();
+    console.log(productName)
+    return productName;
+  }
+
+  productsInSupplyChain = async (supplyChainId) => {
+    //this.setState({ products: [] })
+    const productsCount = await contract.methods.productCountInSupplyChain(supplyChainId).call()
+    console.log(productsCount)
+    setProductsCount(productsCount)
+    //const products = []
+    setProducts([])
+    for (var i = 1; i <= productsCount; i++) {
+      const product = await contract.methods.productBySupplyChain(supplyChainId, i).call()
+      setProducts({
+        products: [...products, product]
+      })
+      console.log("Debug Products", products);
+      //products = [...products, product]
+    }
+    return products;
   }
 
   return (
@@ -120,7 +146,16 @@ function App() {
             <ParticipationRequests/>
           </Route>
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
-          <Route exact path="/transfer" component={TransferProduct} />
+          <Route exact path="/transfer">
+            <TransferProduct
+              getProductName={getProductName}
+              productsInSupplyChain={productsInSupplyChain}
+              currentBatchesInOwnership={currentBatchesInOwnership}
+              currentUnitsInOwnership={currentUnitsInOwnership}
+              transferProduct={transferProduct}
+              requestTransfer={requestTransfer}
+            />
+          </Route>
           <Route exact path="/tracking" component={ProductTracking}/>
           <Route exact path="/createProduct">
             <CreateProduct
