@@ -2,7 +2,7 @@ import React from 'react'
 import { initObject } from "../../components/initVariables/initObject"
 import axios from "axios"
 
-export const getEntityData = async(entityId) => {
+const getEntityData = async(entityId) => {
   try{
     const response = await axios.get(`${initObject().initVariables}/entity/${entityId}`, {
       headers: {
@@ -15,3 +15,5 @@ export const getEntityData = async(entityId) => {
     console.error(error.response)
   }
 }
+
+export default getEntityData

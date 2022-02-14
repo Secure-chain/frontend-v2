@@ -2,13 +2,13 @@ import React from 'react'
 import { initObject } from "../../components/initVariables/initObject"
 import axios from "axios"
 
-const getEntitiesBySupplyChainId = async(supplyChain) => {
+const enrollRequest = async(sendData) => {
     try{
-        const response = axios.get(`${initObject().initVariables}/entity/?supply_chain=${supplyChain}`, {
+        const response = await axios.post(`${initObject().initVariables}/instance/`, sendData,{
         headers: {
             Authorization: `Token ${initObject().token}`,
         },
-    })
+        })
     return response
     }
     catch(error){
@@ -16,4 +16,4 @@ const getEntitiesBySupplyChainId = async(supplyChain) => {
     }
 }
 
-export default getEntitiesBySupplyChainId
+export default enrollRequest

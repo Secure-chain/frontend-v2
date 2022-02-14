@@ -6,7 +6,6 @@ import supplyChainEnrollContent from './supplyChainEnrollContent.css'
 function SupplyChainEnrollContent() {
     const [tab, setTab] = useState(1);
     const [selectedSupplyChain, setSelectedSupplyChain] = useState(0);
-    const [entities, setEntities] = useState([]);
     const changeTab = (tab) => {
         setTab(tab);
     }
@@ -32,7 +31,6 @@ function SupplyChainEnrollContent() {
                         />}
                     {tab === 2 && <RequestParticipation 
                                     selectedSupplyChain={selectedSupplyChain}
-                                    handleEntitiesDisplay={(data)=>setEntities(data)}
                                     />}
                 </div>
                 {/* Call different components based on request */}
