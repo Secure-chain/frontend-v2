@@ -124,9 +124,8 @@ const CreateProduct = ({addProduct}) => {
                     </form>
                     <div className="createproduct__column" style={{display:'flex',alignItems:'center',justifyContent:'ce'}}>
                         <div className="createproduct__column__image" style={{ backgroundImage: `url(media/create.jpg)` }}>
-
-                    </div>
                         </div>
+                    </div>
                 
                 </div>
             </div>

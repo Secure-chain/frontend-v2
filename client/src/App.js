@@ -21,7 +21,7 @@ function App() {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
   const [productsCount, setProductsCount] = useState('')
-  const [products, setProducts] = useState([])
+  // const [products, setProducts] = useState([])
 
   const setup = async () => {
     try {
@@ -104,25 +104,26 @@ function App() {
     return units;
   }
 
-  getProductName = async (productNo) => {
+  // func
+  const getProductName = async (productNo) => {
     const productName = await contract.methods.getProductName(productNo).call();
     console.log(productName)
     return productName;
   }
 
-  productsInSupplyChain = async (supplyChainId) => {
+  const productsInSupplyChain = async (supplyChainId) => {
     //this.setState({ products: [] })
     const productsCount = await contract.methods.productCountInSupplyChain(supplyChainId).call()
     console.log(productsCount)
     setProductsCount(productsCount)
-    //const products = []
-    setProducts([])
+    let products = []
+    // setProducts([])
     for (var i = 1; i <= productsCount; i++) {
       const product = await contract.methods.productBySupplyChain(supplyChainId, i).call()
-      setProducts({
-        products: [...products, product]
-      })
+      // setProducts(products => [...products, product])
+      products.push(product)
       console.log("Debug Products", products);
+      console.log("Data type", typeof product);
       //products = [...products, product]
     }
     return products;

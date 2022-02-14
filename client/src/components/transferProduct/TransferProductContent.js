@@ -1,9 +1,11 @@
 import React from 'react'
 import axios from 'axios';
-import './TransferProduct.scss'
+import './TransferProductContent.scss'
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import useEnhancedEffect from '@mui/utils/useEnhancedEffect';
+import Button from '../common/button/Button';
+import { initObject } from "../../components/initVariables/initObject"
 
 const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatchesInOwnership, currentUnitsInOwnership, transferProduct, requestTransfer }) => {
     let supplychainid = -1;
@@ -144,98 +146,95 @@ const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatches
 
 
     return (
-        <div className="createsupply__bottom">
-            <h1 className="createsupply__bottom__head">Transfer Product</h1>
+        <div className="right-window">
             <div className="transferproduct">
-                <div class="transferproduct__big-card">
-                    <div class="transferproduct__row">
-                        <form class="transferproduct__column" onSubmit={handleSubmit}>
-                            {supplyChain &&
-                                <div className="transferproduct__form-group">
-                                    <label className="transferproduct__label">Select Supply Chain : </label>
-                                    <select
-                                        className="transferproduct__input"
-                                        name="supplyChains"
-                                        id="supplyChains"
-                                        onChange={handleRecievers}
-                                    >
-                                        <option value="">
-                                            Choose
-                                        </option>
-                                        {supplyChain.map((supplychain) => {
-                                            return (
-                                                <option key={supplychain.id} value={supplychain.id}>
-                                                    {supplychain.name}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                </div>
-                            }
-                            {products &&
-                                <div className="transferproduct__form-group">
-                                    <label className="transferproduct__label">Select Product : </label>
-                                    <select
-                                        className="transferproduct__input"
-                                        name="product"
-                                        id="product"
-                                        //onChange={(e) => setProductNo(e.target.value)}
-                                        onChange={handleProducts}
-                                    >
-                                        <option value="">
-                                            Choose
-                                        </option>
-                                        {products.map((product) => {
-                                            return (
-                                                <option key={product.productNo} value={product.productNo}>
-                                                    {product.productNo}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                </div>
-                            }
-                            {batchesInOwnership &&
-                                <div>
-                                    <h2 className="transferproduct__title">Batches in Ownership:- {batchesInOwnership}</h2>
-                                </div>
-                            }
-                            {unitsInOwnership &&
-                                <h1 className="transferproduct__title">Units per Batch:- {unitsInOwnership}</h1>
-                            }
-                            <h1 className="transferproduct__title">Reciever's Details</h1>
+                <div class="transferproduct__row">
+                    <form class="transferproduct__column" onSubmit={handleSubmit}>
+                        {supplyChain &&
                             <div className="transferproduct__form-group">
-                                <label className="transferproduct__label">Select Receiver : </label>
+                                <label className="transferproduct__label">Select Supply Chain : </label>
                                 <select
                                     className="transferproduct__input"
-                                    name="receiver"
-                                    id="receiver"
-                                    onChange={(e) => handleSelectedReciever(e)}
+                                    name="supplyChains"
+                                    id="supplyChains"
+                                    onChange={handleRecievers}
                                 >
-                                    <option>Choose</option>
-                                    {allowedRecievers.map((allowed) => {
+                                    <option value="">
+                                        Choose
+                                    </option>
+                                    {supplyChain.map((supplychain) => {
                                         return (
-                                            <option key={allowed.ethereum_address} value={allowed.ethereum_address} >
-                                                {allowed.name}
+                                            <option key={supplychain.id} value={supplychain.id}>
+                                                {supplychain.name}
                                             </option>
                                         );
                                     })}
                                 </select>
                             </div>
+                        }
+                        {products &&
                             <div className="transferproduct__form-group">
-                                <label className="transferproduct__label">Batches to be transferred : </label>
-                                <input className="transferproduct__input"
-                                    name="unit"
-                                    type="number"
-                                    id="unit"
-                                    onChange={(e) => { setTransferUnits(e.target.value) }}
-                                />
+                                <label className="transferproduct__label">Select Product : </label>
+                                <select
+                                    className="transferproduct__input"
+                                    name="product"
+                                    id="product"
+                                    //onChange={(e) => setProductNo(e.target.value)}
+                                    onChange={handleProducts}
+                                >
+                                    <option value="">
+                                        Choose
+                                    </option>
+                                    {products.map((product) => {
+                                        return (
+                                            <option key={product.productNo} value={product.productNo}>
+                                                {product.productNo}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
                             </div>
-                            <button className="transferproduct__button" type="submit" >Request Transfer</button>
-                        </form>
-                        <div class="transferproduct__column">
-                            <div class="transferproduct__column__image" style={{ backgroundImage: `url(media/transfer1.jpg)` }}>
+                        }
+                        {batchesInOwnership &&
+                            <div>
+                                <h2 className="transferproduct__title">Batches in Ownership:- {batchesInOwnership}</h2>
                             </div>
+                        }
+                        {unitsInOwnership &&
+                            <h1 className="transferproduct__title">Units per Batch:- {unitsInOwnership}</h1>
+                        }
+                        <h1 className="transferproduct__title">Reciever's Details</h1>
+                        <div className="transferproduct__form-group">
+                            <label className="transferproduct__label">Select Receiver : </label>
+                            <select
+                                className="transferproduct__input"
+                                name="receiver"
+                                id="receiver"
+                                onChange={(e) => handleSelectedReciever(e)}
+                            >
+                                <option>Choose</option>
+                                {allowedRecievers.map((allowed) => {
+                                    return (
+                                        <option key={allowed.ethereum_address} value={allowed.ethereum_address} >
+                                            {allowed.name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+                        <div className="transferproduct__form-group">
+                            <label className="transferproduct__label">Batches to be transferred : </label>
+                            <input className="transferproduct__input"
+                                name="unit"
+                                type="number"
+                                id="unit"
+                                onChange={(e) => { setTransferUnits(e.target.value) }}
+                            />
+                        </div>
+                        <Button className="transferproduct__button" type="submit" text="Request Transfer" onClick={handleSubmit} />
+                    </form>
+                    <div className="transferproduct__column" style={{ display: 'flex', alignItems: 'center', justifyContent: 'ce' }}>
+                        <div className="transferproduct__column__image" style={{ backgroundImage: `url(media/transfer1.jpg)` }}>
                         </div>
                     </div>
                 </div>
