@@ -5,6 +5,10 @@ import supplyChainEnrollContent from './supplyChainEnrollContent.css'
 
 function SupplyChainEnrollContent() {
     const [tab, setTab] = useState(1);
+    const [selectedSupplyChain, setSelectedSupplyChain] = useState(0);
+    const changeTab = (tab) => {
+        setTab(tab);
+    }
     return (
         <div className='right-window'>
             <div className='create-chain-container' >
@@ -22,9 +26,12 @@ function SupplyChainEnrollContent() {
                 <div className='tab-content'>
                     {tab === 1 &&
                         <SelectSupplyChain
+                            handleSupplyChainSelection={(id) =>  {console.log(id); setSelectedSupplyChain(id)}}
                             handleTabChange={(data) => setTab(data)}
                         />}
-                    {tab === 2 && <RequestParticipation />}
+                    {tab === 2 && <RequestParticipation 
+                                    selectedSupplyChain={selectedSupplyChain}
+                                    />}
                 </div>
                 {/* Call different components based on request */}
             </div>
