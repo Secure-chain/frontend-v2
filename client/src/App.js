@@ -22,7 +22,7 @@ function App() {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
   const [productsCount, setProductsCount] = useState('')
-  // const [products, setProducts] = useState([])
+  const [productHistoryCount, setProductHistoryCount] = useState('')
 
   const setup = async () => {
     try {
@@ -105,13 +105,14 @@ function App() {
     return units;
   }
 
-  // func
+  // function to get the name of a product from product no.
   const getProductName = async (productNo) => {
     const productName = await contract.methods.getProductName(productNo).call();
     console.log(productName)
     return productName;
   }
 
+  // function to get the products in a particular supply chain
   const productsInSupplyChain = async (supplyChainId) => {
     //this.setState({ products: [] })
     const productsCount = await contract.methods.productCountInSupplyChain(supplyChainId).call()
@@ -130,6 +131,7 @@ function App() {
     return products;
   }
 
+  // function to get the notifications received by a user
   const getNotificationsOfUser = async () => {
     const notificationsCount = await contract.methods.getNotificationsCount(accounts[0]).call();
     let notifications = []
@@ -140,6 +142,7 @@ function App() {
     return notifications;
   }
 
+  // function to accept the transfer request for batches of a product
   const acceptTransfer = async (notificationId, timestamp) => {
     setLoading(true)
     console.log(contract)
@@ -148,10 +151,31 @@ function App() {
     })
   }
 
+  // function to fetch the history of a particular batch of a product
+  const getProductHistory = async (supplyChainId, productNo, batchId) => {
+
+    let productHistory = []
+    const productHistoryCount = await contract.methods.productHistoryCount(productNo).call()
+    console.log(productHistoryCount)
+    setProductHistoryCount(productHistoryCount)
+
+    for (var i = 1; i <= productHistoryCount; i++) {
+      const batchHistory = await contract.methods.productHistory(productNo, i).call()
+      console.log("history", batchHistory)
+      if ((batchId >= batchHistory.firstBatch) && (batchId <= batchHistory.lastBatch)) {
+        productHistory = [...productHistory, batchHistory]
+      }
+      console.log("Debug Product History", productHistory);
+    }
+    return productHistory;
+  }
+
   return (
     <div>
       <Router>
-        <NavBar/>
+        <NavBar
+          account={account}
+        />
         <SideNav/>
         <Switch>
           <Route exact path="/createEntity" component={CreateEntity}/>
@@ -179,7 +203,11 @@ function App() {
               requestTransfer={requestTransfer}
             />
           </Route>
-          <Route exact path="/tracking" component={ProductTracking}/>
+          <Route exact path="/tracking">
+            <ProductTracking
+              getProductHistory={getProductHistory}
+            />
+          </Route>
           <Route exact path="/createProduct">
             <CreateProduct
               addProduct={addProduct}
