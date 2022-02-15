@@ -4,16 +4,23 @@ import Input from '../common/input/Input'
 import ProductHistory from './ProductHistory'
 import trackingContent from './trackingContent.css'
 
-function TrackingContent() {
+function TrackingContent({ getProductHistory }) {
 
     const [productNumber, setProductNumber] = useState("")
     const [supplyChainID, setSupplyChainID] = useState("")
     const [batchID, setBatchID] = useState("")
-    const [batchHistory, setBatchHistory] = useState([]);
+    const [batchHistory, setBatchHistory] = useState([])
+    const [batchHistorySuccess, setBatchHistorySuccess] = useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        
+        setBatchHistorySuccess(true)
+    
+        if(batchID !== "") {
+            getProductHistory(parseInt(supplyChainID), productNumber, parseInt(batchID)).then((res) => {
+                setBatchHistory(res);
+            });
+        }
     }
 
     return(
@@ -33,7 +40,9 @@ function TrackingContent() {
                         <Button text='Track History' style={{ width: '150px' }} />
                     </div>
                 </form>
-                <ProductHistory/>
+                <ProductHistory
+                    batchHistory={batchHistory}
+                />
             </div>
         </div>
     );
