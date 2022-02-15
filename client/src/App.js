@@ -202,7 +202,11 @@ function App() {
               requestTransfer={requestTransfer}
             />
           </Route>
-          <Route exact path="/tracking" component={ProductTracking}/>
+          <Route exact path="/tracking">
+            <ProductTracking
+              getProductHistory={getProductHistory}
+            />
+          </Route>
           <Route exact path="/createProduct">
             <CreateProduct
               addProduct={addProduct}
