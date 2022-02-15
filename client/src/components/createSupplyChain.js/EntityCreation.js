@@ -115,7 +115,7 @@ const handleSubmitFlow = () => {
   postFlowArray(flow)
   .then(res => {
     console.log(res)
-    history.push('/ownedsupplychains');
+    history.push('/dashboard/ownedsupplychains');
   })
   setFlow([]);
 }

@@ -26,7 +26,7 @@ const SideNavItem = [
         icon : <FaIcons.FaUserCircle/>
       },
       {
-        title : 'Participation Request',
+        title : 'Transfer Request',
         path : '/dashboard/participationrequests',
         icon : <FaIcons.FaUserCircle/>
       }

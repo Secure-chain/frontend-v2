@@ -45,7 +45,7 @@ function ParticipationRequests({ getNotificationsOfUser, acceptTransfer }) {
 
   return(
     <div>
-      <Header title='Participation Requests' />
+      <Header title='Transfer Requests' />
 
       {notifications && notifications.map((d) => {
         return (
