@@ -21,7 +21,7 @@ function App() {
   const [contract, setContract] = useState(null);
   const [loading, setLoading] = useState(true);
   const [productsCount, setProductsCount] = useState('')
-  // const [products, setProducts] = useState([])
+  const [productHistoryCount, setProductHistoryCount] = useState('')
 
   const setup = async () => {
     try {
@@ -151,7 +151,7 @@ function App() {
   }
 
   // function to fetch the history of a particular batch of a product
-  getProductHistory = async (supplyChainId, productNo, batchId) => {
+  const getProductHistory = async (supplyChainId, productNo, batchId) => {
 
     let productHistory = []
     const productHistoryCount = await contract.methods.productHistoryCount(productNo).call()
@@ -172,7 +172,9 @@ function App() {
   return (
     <div>
       <Router>
-        <NavBar/>
+        <NavBar
+          account={account}
+        />
         <SideNav/>
         <Switch>
           <Route exact path="/createEntity" component={CreateEntity}/>
