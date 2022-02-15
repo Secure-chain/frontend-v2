@@ -1,6 +1,10 @@
 .product-history-container{
     padding: 100px 100px 100px 100px;
 }
+.tracking-content{
+    display: flex;
+    flex-direction: row;
+}
 .product-history-date{
     width: 195px;
     height: 19px;
@@ -29,4 +33,10 @@
 
     color: #727272;
 
+}
+.line{
+    height: 150px;
+    border-left: 2px solid #000000;
+    margin-left: 10px;
+    padding: 10px 10px 10px 10px;
 }
