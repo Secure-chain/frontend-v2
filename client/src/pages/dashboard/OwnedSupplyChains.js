@@ -3,6 +3,7 @@ import SupplyChainCard from '../../components/supplyChainCard/SupplyChainCard';
 import Header from '../../components/header/Header';
 import OwnedSupplyChainsStyle from './OwnedSupplyChains.css'
 import {useEffect, useHistory,useState} from 'react'
+import {Card, Button} from 'react-bootstrap'
 import axios from 'axios';
 import { initObject } from '../../components/initVariables/initObject';
 
@@ -12,9 +13,8 @@ function OwnedSupplyChains() {
 
   let token = initObject().token
   const [ownedsupplychain, setownedsupplychain] = useState([]);
-
   useEffect(() => {
-      axios.get('https://securechain-backend.herokuapp.com/mysupplychain/',
+      axios.get('https://securechain.pythonanywhere.com/mysupplychain/',
       {
         headers: 
         {
@@ -22,13 +22,20 @@ function OwnedSupplyChains() {
         }
       }).then((res) => {
             setownedsupplychain(
-              res.data
+              res.data.reverse()
           );
           console.log(res.data);
       }).catch((err) => {
           console.log(err)
       })
   }, [])
+
+  // const reverse_array = () => {
+  //   setownedsupplychain(prevState => {
+  //       const arr = prevState;
+  //       return arr.reverse();
+  //   })
+// }
 
   return( 
     <div>
@@ -40,7 +47,7 @@ function OwnedSupplyChains() {
                   <div className='row'>
                     <SupplyChainCard 
                       title={supplychain.name}
-                      date='17th December 2021'
+                      date={supplychain.date_created}
                       description={supplychain.details}
                     />
                   </div>  

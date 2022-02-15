@@ -19,8 +19,7 @@ function SupplyChainCard({title,date,description}) {
             </div>
             <div className='supply-chain-card-button'>
                 <Button text = 'View'/> 
-            </div>
-            
+            </div>  
         </div>
   );
 }
