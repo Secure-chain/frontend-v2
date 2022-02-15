@@ -16,3 +16,7 @@
     display: table;
     clear: both;
 }
+.custom-card{
+    width : 90%;
+    margin: auto;
+}
