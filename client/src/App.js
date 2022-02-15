@@ -162,7 +162,10 @@ function App() {
             <EnrolledSupplyChains/>
           </Route>
           <Route exact path="/dashboard/participationrequests">
-            <ParticipationRequests/>
+            <ParticipationRequests
+              getNotificationsOfUser={getNotificationsOfUser}
+              acceptTransfer={acceptTransfer}
+            />
           </Route>
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
           <Route exact path="/transfer">
