@@ -13,7 +13,7 @@ function EnrolledSupplyChains() {
   const [enrolledsupplychain, setenrolledsupplychain] = useState([]);
   
   useEffect(() => {
-      axios.get('https://securechain-backend.herokuapp.com/enrolledsupplychain/',
+      axios.get('https://securechain.pythonanywhere.com/enrolledsupplychain/',
       {
         headers: 
         {
@@ -21,7 +21,7 @@ function EnrolledSupplyChains() {
         }
       }).then((res) => {
             setenrolledsupplychain(
-              res.data
+              res.data.reverse()
             );
             console.log(res.data);
           }).catch((err) => {
@@ -33,15 +33,19 @@ function EnrolledSupplyChains() {
     <div>
         <Header title='Enrolled Supply Chains' /> 
         <div className='right-window'>
+          <div className='column'>
             {enrolledsupplychain.map((supplychain, key)=>{
                 return(
-                    <SupplyChainCard 
-                    title={supplychain.name}
-                    date='17th December 2021'
-                    description={supplychain.details}
-                    />
+                    <div className='row'>
+                      <SupplyChainCard 
+                      title={supplychain.name}
+                      date={supplychain.date_created}
+                      description={supplychain.details}
+                      />
+                    </div> 
                 )}
             )}
+          </div>
         </div>
     </div>
   );

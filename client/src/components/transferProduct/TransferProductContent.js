@@ -48,7 +48,7 @@ const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatches
 
     useEffect(() => {
         axios
-            .get('https://securechain-backend.herokuapp.com/enrolledsupplychain/',
+            .get('https://securechain.pythonanywhere.com/enrolledsupplychain/',
                 {
                     headers: {
                         Authorization: `Token ${token}`
@@ -65,7 +65,7 @@ const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatches
                 console.log(err)
             })
         // axios
-        //     .get('https://securechain-backend.herokuapp.com/allowedreceivers/',
+        //     .get('https://securechain.pythonanywhere.com/allowedreceivers/',
         //         {
         //             headers: {
         //                 Authorization: `Token ${token}`
@@ -99,7 +99,7 @@ const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatches
         console.log(supplychainid)
         setTransferSupplyChain(e.target.value)
         axios
-            .get('https://securechain-backend.herokuapp.com/allowedreceivers/' + supplychainid + '/',
+            .get('https://securechain.pythonanywhere.com/allowedreceivers/' + supplychainid + '/',
                 {
                     headers: {
                         Authorization: `Token ${token}`

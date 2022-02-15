@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Playground from './components/playground/Playground'
 import NavBar from './components/navBar/NavBar'
