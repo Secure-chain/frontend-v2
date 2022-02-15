@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import './transferProductContent.scss'
+import './TransferProductContent.scss'
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import useEnhancedEffect from '@mui/utils/useEnhancedEffect';

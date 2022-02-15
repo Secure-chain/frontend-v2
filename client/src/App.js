@@ -129,6 +129,24 @@ function App() {
     return products;
   }
 
+  const getNotificationsOfUser = async () => {
+    const notificationsCount = await contract.methods.getNotificationsCount(accounts[0]).call();
+    let notifications = []
+    for (var i = 1; i <= notificationsCount; i++) {
+      const notification = await contract.methods.getNotifications(accounts[0], i).call()
+      notifications = [...notifications, notification]
+    }
+    return notifications;
+  }
+
+  const acceptTransfer = async (notificationId, timestamp) => {
+    setLoading(true)
+    console.log(contract)
+    contract.methods.acceptTransfer(notificationId, timestamp).send({ from: account }).on('transactionHash', (hash) => {
+      setLoading(false)
+    })
+  }
+
   return (
     <div>
       <Router>
@@ -144,7 +162,10 @@ function App() {
             <EnrolledSupplyChains/>
           </Route>
           <Route exact path="/dashboard/participationrequests">
-            <ParticipationRequests/>
+            <ParticipationRequests
+              getNotificationsOfUser={getNotificationsOfUser}
+              acceptTransfer={acceptTransfer}
+            />
           </Route>
           <Route exact path="/enroll" component={EnrollInSupplyChain} />
           <Route exact path="/transfer">

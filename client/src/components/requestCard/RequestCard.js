@@ -2,7 +2,16 @@ import React from 'react';
 import RequestCardStyle from './RequestCard.css'
 import Button from '../common/button/Button';
 
-function RequestCard({date,sender,supplychain,product,batches}) {
+function RequestCard({acceptTransfer, notiId, date, sender, supplychain, product, batches}) {
+
+    const submitHandler = () => {
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        let timestamp = date + '_' + time;
+        acceptTransfer(notiId, timestamp);
+    }
+
   return( 
     <div className='request-card'>
         <div className='request-card-title'>
@@ -32,7 +41,7 @@ function RequestCard({date,sender,supplychain,product,batches}) {
             </div>
             
             <div className='request-card-accept'>
-                <Button text = 'Accept'/> 
+                  <Button text='Accept' onClick={submitHandler}/> 
             </div>
             <div className='request-card-reject'>
                 <Button text = 'Reject'/> 
