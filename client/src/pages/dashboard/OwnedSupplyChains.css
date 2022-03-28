@@ -5,3 +5,18 @@
     background: #F7F7F7;
     justify-content: center;
 }
+.column {
+    float: left;
+    width: 100%;
+  }
+  
+  /* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.custom-card{
+    width : 90%;
+    margin: auto;
+}

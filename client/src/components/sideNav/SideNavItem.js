@@ -22,11 +22,11 @@ const SideNavItem = [
       },
       {
         title : 'Enrolled Supply Chains',
-        path : '',
+        path : '/dashboard/enrolledsupplychains',
         icon : <FaIcons.FaUserCircle/>
       },
       {
-        title : 'Participation Request',
+        title : 'Transfer Request',
         path : '/dashboard/participationrequests',
         icon : <FaIcons.FaUserCircle/>
       }
@@ -46,7 +46,7 @@ const SideNavItem = [
       },
       {
           title : 'Enroll in a Supply Chain',
-          path : '',
+          path : '/enroll',
           icon : <FaIcons.FaUserCircle/>
       }
     ]
@@ -60,12 +60,12 @@ const SideNavItem = [
     subNav : [
       {
         title : 'Create Product',
-        path : '',
+        path : '/createProduct',
         icon : <FaIcons.FaUserCircle/>
       },
       {
         title : 'Transfer Product',
-        path : '',
+        path : '/transfer',
         icon : <FaIcons.FaUserCircle/>
       }
     ]

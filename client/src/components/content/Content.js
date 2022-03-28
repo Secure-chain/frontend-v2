@@ -5,9 +5,10 @@ import './content.css';
 function Content() {
 const [tab, setTab] = useState(1);
 const [id,setId] = useState(0);
+const [supplyChain, setSupplyChain] = useState({});
   return (
-  <div className='right-window' style={tab == 2 ? {height : 'max-content', paddingTop : '10px'} : {height : 'max-content', paddingTop : '10px'}}>
-    <div className='create-chain-container' >
+  <div className='right-window'>
+    <div className='create-chain-container'>
         <div className='tab-container'>
             <div className='tab-group'>
                 <div className={tab === 1 ? 'tab-active' : 'tab'} onClick={() => setTab(1)}>1</div>
@@ -24,8 +25,12 @@ const [id,setId] = useState(0);
              <SupplyChainDetails 
                 setId={(data)=>setId(data)} 
                 handleTabChange={(data)=>setTab(data)}
+                setSupplyChain={(data)=>setSupplyChain(data)}
             />}
-            {tab === 2 && <EntityCreation />}
+            {tab === 2 && 
+            <EntityCreation
+                supplyChain={supplyChain}
+             />}
         </div>
         {/* Call different components based on request */}
     </div>
