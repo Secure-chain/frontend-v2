@@ -8,6 +8,7 @@ import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 import ProductTracking from './pages/tracking/ProductTracking'
 import SupplyChainManagement from "./contracts/SupplyChainManagement.json";
+import Login from './pages/login/Login'
 import getWeb3 from "./getWeb3";
 function App() {
 
@@ -74,6 +75,7 @@ function App() {
             <ParticipationRequests/>
           </Route>
           <Route exact path="/tracking" component={ProductTracking}/>
+          <Route exact path="/login" component={Login} />
         </Switch>
       </Router>
     </div>
