@@ -11,11 +11,11 @@ import ProductTracking from './pages/tracking/ProductTracking'
 import SupplyChainManagement from "./contracts/SupplyChainManagement.json"
 import Login from './pages/login/Login'
 import EnrollInSupplyChain from './pages/enrollInSupplyChain/EnrollInSupplyChain'
-import SupplyChainManagement from "./contracts/SupplyChainManagement.json"
 import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
 import TransferProduct from "./pages/transfer/TransferProduct.js"
 import getWeb3 from "./getWeb3"
 import CreateProduct from './pages/product/CreateProduct'
+import Optimal from './pages/optimal/Optimal'
 function App() {
 
   const [account, setAccount] = useState('');
@@ -218,6 +218,7 @@ function App() {
           </Route>
           <Route exact path="/tracking" component={ProductTracking}/>
           <Route exact path="/login" component={Login} />
+          <Route exact path='/optimal' component={Optimal} />
         </Switch>
       </Router>
     </div>
