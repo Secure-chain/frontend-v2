@@ -8,6 +8,7 @@ import Select from '@mui/material/Select';
 import './optimal.scss'
 import getEntitiesBySupplyChainId from '../../APIcalls/getEntitiesBySupplyChainId';
 import Button from '../common/button/Button';
+import Input from '../common/input/Input';
 function OptimalWindow() {
     const [supplychains, setSupplychains] = useState([]);
     const [selectedSupplyChainId, setSelectedSupplyChainId] = useState(0);
@@ -83,12 +84,17 @@ function OptimalWindow() {
                 </FormControl>
             </Box>
         </div>}
-        <div className='optimal-input-container'>
-            <div className='optimal-input-box'>
-                <label>Goal  : &nbsp; </label>
-                <input type='text' placeholder='Enter Goal' />
+            <Input 
+                type='text'
+                placeholder='Enter Goal'
+                style={{ paddingLeft: '20px', margin: 'auto'}}
+            />
+        <br/>
+        <div className='optimal-btn'>
+        <Button text='Create Constraint' 
+                style={{width: '150px'}}
+        />
         </div>
-        <Button text='Create Constraint' />
         <div className='select-box'>
             <Box sx={{ minWidth: 300 }}>
                 <FormControl fullWidth>
@@ -113,7 +119,7 @@ function OptimalWindow() {
                 </FormControl>
             </Box>
         </div>
-        <input type='text' placeholder='Enter Coefficient' />
+        <Input type='text' placeholder='Enter Coefficient' />
         <div className='select-box'>
             <Box sx={{ minWidth: 300 }}>
                 <FormControl fullWidth>
@@ -138,8 +144,7 @@ function OptimalWindow() {
                 </FormControl>
             </Box>
         </div>
-        <input type='text' placeholder='Enter constant' />
-        </div>
+        <Input type='text' placeholder='Enter constant' />
     </div>
   )
 }

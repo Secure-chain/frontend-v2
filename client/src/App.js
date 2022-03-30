@@ -16,6 +16,7 @@ import TransferProduct from "./pages/transfer/TransferProduct.js"
 import getWeb3 from "./getWeb3"
 import CreateProduct from './pages/product/CreateProduct'
 import Optimal from './pages/optimal/Optimal'
+import Graph from './pages/graph/Graph'
 function App() {
 
   const [account, setAccount] = useState('');
@@ -219,6 +220,7 @@ function App() {
           <Route exact path="/tracking" component={ProductTracking}/>
           <Route exact path="/login" component={Login} />
           <Route exact path='/optimal' component={Optimal} />
+          <Route exact path='/graph' component={Graph} />
         </Switch>
       </Router>
     </div>
