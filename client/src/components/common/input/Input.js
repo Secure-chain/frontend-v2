@@ -1,6 +1,6 @@
 import React from 'react';
 import './input.css';
-function Input({type, placeholder, value, onChange, onBlur, onFocus, style}) {
+function Input({type, placeholder, value, onChange, onBlur, onFocus, style, className}) {
   return (
   <div>
     <input 
@@ -11,7 +11,7 @@ function Input({type, placeholder, value, onChange, onBlur, onFocus, style}) {
         style={style}
         onBlur={onBlur}
         onFocus={onFocus}
-        className='input-field'
+        className={`input-field ${className}`}
      />
   </div>
   )

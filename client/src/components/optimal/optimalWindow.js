@@ -9,19 +9,29 @@ import './optimal.scss'
 import getEntitiesBySupplyChainId from '../../APIcalls/getEntitiesBySupplyChainId';
 import Button from '../common/button/Button';
 import Input from '../common/input/Input';
+import { useHistory } from 'react-router';
 function OptimalWindow() {
     const [supplychains, setSupplychains] = useState([]);
     const [selectedSupplyChainId, setSelectedSupplyChainId] = useState(0);
     const [entitiesForSelectedSupplyChain, setEntitiesForSelectedSupplyChain] = useState([]);
     const [selectedEntityId, setSelectedEntityId] = useState(0);
-    const [entityInstances, setEntityInstances] = useState([]);
+    const [entityInstances, setEntityInstances] = useState([
+        {
+            id:1,
+            entity_instance_name:'Bharat Biotech'
+        },
+        {
+            id:2,
+            entity_instance_name:'Serum Institute'
+        }
+    ]);
     const [selectedEntityInstanceId, setSelectedEntityInstanceId] = useState(0);
     const [operators, setOperators] = useState(['=', '<=']);
     const [selectedOperator, setSelectedOperator] = useState(' ');
+    let history = useHistory();
     useEffect(() => {
         getMySupplyChains().then(res => {
-            console.log(res.data);
-            setSupplychains(res.data);
+            setSupplychains(res?.data);
         })
     }, [])
     useEffect(() => {
@@ -91,60 +101,70 @@ function OptimalWindow() {
             />
         <br/>
         <div className='optimal-btn'>
-        <Button text='Create Constraint' 
-                style={{width: '150px'}}
+        <h3>
+            Create Constraints
+        </h3>
+        
+        </div>
+        <div className='constraint-container'>
+            <Input className='coeff-input' type='text' placeholder='Enter Coefficient' />
+            <div className='select-box entity-select'>
+                <Box sx={{ minWidth: 350 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Choose Entity Instance</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedEntityInstanceId}
+                            label="Select Entity Instance"
+                            onChange={(e) => {
+                                setSelectedEntityInstanceId(e.target.value)
+                            }}
+                        >
+                            {entityInstances?.map(entityInstance => {
+                                return (
+                                    <MenuItem value={entityInstance.id} key={entityInstance.id}>
+                                        {entityInstance.entity_instance_name}
+                                    </MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+            <div className='select-box'>
+                <Box sx={{ minWidth: 100 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Choose Operator</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedOperator}
+                            label="Select Operator"
+                            onChange={(e) => {
+                                setSelectedOperator(e.target.value)
+                            }}
+                        >
+                            {operators?.map(operator => {
+                                return (    
+                                    <MenuItem value={operator} key={operator}>
+                                        {operator}
+                                    </MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+            <Input type='text' placeholder='Enter constant' />
+        </div>
+        <Button 
+            text='Create Constraint' 
+            style={{width: '150px'}}
+            onClick={(e)=>{
+                history.push('/graph');
+            }}
         />
-        </div>
-        <div className='select-box'>
-            <Box sx={{ minWidth: 300 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Choose Entity Instance</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={selectedEntityInstanceId}
-                        label="Select Entity Instance"
-                        onChange={(e) => {
-                            setSelectedEntityInstanceId(e.target.value)
-                        }}
-                    >
-                        {entityInstances?.map(entityInstance => {
-                            return (
-                                <MenuItem value={entityInstance.id} key={entityInstance.id}>
-                                    {entityInstance.entity_instance_name}
-                                </MenuItem>
-                            )
-                        })}
-                    </Select>
-                </FormControl>
-            </Box>
-        </div>
-        <Input type='text' placeholder='Enter Coefficient' />
-        <div className='select-box'>
-            <Box sx={{ minWidth: 300 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Choose Operator</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={selectedOperator}
-                        label="Select Operator"
-                        onChange={(e) => {
-                            setSelectedOperator(e.target.value)
-                        }}
-                    >
-                        {operators?.map(operator => {
-                            return (    
-                                <MenuItem value={operator} key={operator}>
-                                    {operator}
-                                </MenuItem>
-                            )
-                        })}
-                    </Select>
-                </FormControl>
-            </Box>
-        </div>
-        <Input type='text' placeholder='Enter constant' />
     </div>
   )
 }

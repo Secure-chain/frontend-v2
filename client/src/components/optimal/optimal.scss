@@ -2,11 +2,17 @@
     width: 600px;
     margin: auto;
     
-    .select-box{
-
-    }
 
     .optimal-btn{
         margin: auto;
+    }
+    .constraint-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        .coeff-input{
+            width: 140px;
+        }
     }
 }
