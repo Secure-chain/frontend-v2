@@ -1,6 +1,6 @@
 export const initObject = () => {
     return {
-    initVariables : "https://securechain-backend.herokuapp.com",
+    initVariables : "http://127.0.0.1:8000",
     token: localStorage.getItem("token"),
     }
 }

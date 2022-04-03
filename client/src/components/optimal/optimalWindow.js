@@ -7,6 +7,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import './optimal.scss'
 import getEntitiesBySupplyChainId from '../../APIcalls/getEntitiesBySupplyChainId';
+import getInstanceOfEntity from '../../APIcalls/getInstanceOfEntity';
+import postFindPathData from '../../APIcalls/postOptimalPath';
 import Button from '../common/button/Button';
 import Input from '../common/input/Input';
 import { useHistory } from 'react-router';
@@ -28,7 +30,38 @@ function OptimalWindow() {
     const [selectedEntityInstanceId, setSelectedEntityInstanceId] = useState(0);
     const [operators, setOperators] = useState(['=', '<=']);
     const [selectedOperator, setSelectedOperator] = useState(' ');
+    const [goal,setGoal] = useState("");
+    const [constant, setConstant] = useState(0);
+    const [coefficient, setCoefficient] = useState(0);
     let history = useHistory();
+
+
+    // creating findPathData 
+    const postFindPathDataUtil = () => {
+        const data = {
+            goal : goal,
+            constraints : [
+                {
+                    operator : selectedOperator,
+                    constant : constant,
+                    parameters : [
+                        {
+                            variable : selectedEntityInstanceId,
+                            coefficient : coefficient
+                        }
+                    ]
+                }
+            ]
+        }
+        console.log("data to be sent in find path", data);
+        postFindPathData(selectedSupplyChainId,selectedEntityId, data).then(res=> {
+            console.log("res 0f final data",res.data);
+        })
+    }
+
+
+
+
     useEffect(() => {
         getMySupplyChains().then(res => {
             setSupplychains(res?.data);
@@ -42,6 +75,14 @@ function OptimalWindow() {
             })
         }
     }, [selectedSupplyChainId])
+    useEffect(() => {
+        if (selectedSupplyChainId !== 0) {
+            getInstanceOfEntity(selectedEntityId).then(res => {
+                console.log("Instances",res.data)
+                setEntityInstances(res.data)
+            })
+        }
+    }, [selectedEntityId])
   return (
     <div className='optimal-container'>
         <h1>Find Optimam chain path</h1>
@@ -98,6 +139,10 @@ function OptimalWindow() {
                 type='text'
                 placeholder='Enter Goal'
                 style={{ paddingLeft: '20px', margin: 'auto'}}
+                onChange = {(e)=>{
+                    setGoal(e.target.value);
+                }}
+                value={goal}
             />
         <br/>
         <div className='optimal-btn'>
@@ -107,7 +152,7 @@ function OptimalWindow() {
         
         </div>
         <div className='constraint-container'>
-            <Input className='coeff-input' type='text' placeholder='Enter Coefficient' />
+            <Input className='coeff-input' type='text' placeholder='Enter Coefficient' value={coefficient} onChange={(e) => setCoefficient(e.target.value)}/>
             <div className='select-box entity-select'>
                 <Box sx={{ minWidth: 350 }}>
                     <FormControl fullWidth>
@@ -124,7 +169,7 @@ function OptimalWindow() {
                             {entityInstances?.map(entityInstance => {
                                 return (
                                     <MenuItem value={entityInstance.id} key={entityInstance.id}>
-                                        {entityInstance.entity_instance_name}
+                                        {entityInstance.name}
                                     </MenuItem>
                                 )
                             })}
@@ -156,13 +201,27 @@ function OptimalWindow() {
                     </FormControl>
                 </Box>
             </div>
-            <Input type='text' placeholder='Enter constant' />
+            <Input 
+                type='text'
+                placeholder='Enter constant'
+                value={constant}
+                onChange={(e)=>{
+                    setConstant(e.target.value)
+                }}
+            />
         </div>
         <Button 
-            text='Create Constraint' 
+            text='Add Constraint' 
             style={{width: '150px'}}
             onClick={(e)=>{
                 history.push('/graph');
+            }}
+        />
+        <Button 
+            text='Find Path' 
+            style={{width: '150px'}}
+            onClick={(e) => {
+                postFindPathDataUtil()
             }}
         />
     </div>
