@@ -14,7 +14,7 @@ function OwnedSupplyChains() {
   let token = initObject().token
   const [ownedsupplychain, setownedsupplychain] = useState([]);
   useEffect(() => {
-      axios.get('https://securechain.pythonanywhere.com/mysupplychain/',
+      axios.get('https://securechain-backend.herokuapp.com/mysupplychain/',
       {
         headers: 
         {

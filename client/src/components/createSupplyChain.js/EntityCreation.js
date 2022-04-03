@@ -82,7 +82,7 @@ function EntityCreation({ supplyChain }) {
       generic_attributes : temp,
       supply_chain : supplyChain.id
     }
-    axios.post(`https://securechain.pythonanywhere.com/entity/`, payload,
+    axios.post(`https://securechain-backend.herokuapp.com/entity/`, payload,
       {
         headers: {
             Authorization: `Token ${initObject().token}`,

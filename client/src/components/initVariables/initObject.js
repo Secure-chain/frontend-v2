@@ -1,6 +1,6 @@
 export const initObject = () => {
     return {
-    initVariables : "https://securechain.pythonanywhere.com",
+    initVariables : "https://securechain-backend.herokuapp.com",
     token: localStorage.getItem("token"),
     }
 }
