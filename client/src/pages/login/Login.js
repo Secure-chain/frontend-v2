@@ -35,7 +35,7 @@ const Login = (props) => {
         };
 
         if (flag === 1) {
-            Axios.post('https://securechain-backend.herokuapp.com/login/', {
+            Axios.post('http://127.0.0.1:8000/login/', {
                 email: userReg.email,
                 password: userReg.password
             }).then((response) => {

@@ -12,8 +12,12 @@ import postFindPathData from '../../APIcalls/postOptimalPath';
 import Button from '../common/button/Button';
 import Input from '../common/input/Input';
 import { useHistory } from 'react-router';
+import SupplychainFlow from './SupplychainFlow';
 function OptimalWindow() {
     const [supplychains, setSupplychains] = useState([]);
+    
+const [instanceToValues, setInstanceToValues] = useState([]);
+const [finalCost, setFinalCost] = useState(0);
     const [selectedSupplyChainId, setSelectedSupplyChainId] = useState(0);
     const [entitiesForSelectedSupplyChain, setEntitiesForSelectedSupplyChain] = useState([]);
     const [selectedEntityId, setSelectedEntityId] = useState(0);
@@ -33,6 +37,7 @@ function OptimalWindow() {
     const [goal,setGoal] = useState("");
     const [constant, setConstant] = useState(0);
     const [coefficient, setCoefficient] = useState(0);
+    const [showGraph , setShowGraph] = useState(true);
     let history = useHistory();
 
 
@@ -55,10 +60,12 @@ function OptimalWindow() {
         }
         console.log("data to be sent in find path", data);
         postFindPathData(selectedSupplyChainId,selectedEntityId, data).then(res=> {
-            console.log("res 0f final data",res.data);
+                setInstanceToValues(res.data.vars);
+                setFinalCost(res.data.objective_value)
+                setShowGraph(true);
+
         })
     }
-
 
 
 
@@ -219,10 +226,14 @@ function OptimalWindow() {
         />
         <Button 
             text='Find Path' 
-            style={{width: '150px'}}
             onClick={(e) => {
                 postFindPathDataUtil()
             }}
+            style={{marginTop:'20px',marginBottom:'20px',width: '150px'}}
+        />
+        <SupplychainFlow 
+          instanceForInit={instanceToValues}
+          finalCst={finalCost}
         />
     </div>
   )

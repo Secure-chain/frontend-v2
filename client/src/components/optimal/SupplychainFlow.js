@@ -12,14 +12,14 @@ const rfStyle = {
     alignItems: 'center'
 };
 
-function SupplychainFlow() {
+function SupplychainFlow({instanceForInit, finalCst}) {
     const nodeStyle = { display: 'flex', alignItems: 'center', textAlign: 'center', background: '#cfdcf1', color: '#000', height: '0px', width: 'fit-content' };
-
-
+    const instances = Object.keys(instanceForInit)
+    const values = Object.values(instanceForInit)
     const initElem = [
         {
             id: '1',
-            data: { label: '10L Doses of Covaxin' },
+            data: { label: `Total Vaccines (${finalCst})` },
             position: { x: 0, y: 0 },
             style: nodeStyle,
         },
@@ -48,7 +48,7 @@ function SupplychainFlow() {
 
         {
             id: '5',
-            data: { label: 'Bharat Biotech (5L)' },
+            data: { label: `${instances[0]} (${values[0]}) ` },
             position: { x: -200, y: 100 },
             style: nodeStyle,
             // parentNode: '2',
@@ -57,7 +57,7 @@ function SupplychainFlow() {
 
         {
             id: '6',
-            data: { label: 'Serum Institute of India (3L)' },
+            data: { label: `${instances[0]} (${values[0]}) ` },
             position: { x: 0, y: 100 },
             style: nodeStyle,
             // parentNode: '2',
