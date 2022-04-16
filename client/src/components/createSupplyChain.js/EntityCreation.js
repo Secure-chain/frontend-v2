@@ -70,7 +70,7 @@ function EntityCreation({ supplyChain }) {
       setCurrentAttribute({name, type})
     }
 
-  
+  const [i,setI] = useState(0);
 //////////////////////////// handle submit of entity ////////////////////////
   const handleSubmit = (event, entityName) => {
     // include current attribute in the entity
@@ -82,21 +82,23 @@ function EntityCreation({ supplyChain }) {
       generic_attributes : temp,
       supply_chain : supplyChain.id
     }
-    axios.post(`https://securechain.pythonanywhere.com/entity/`, payload,
-      {
-        headers: {
-            Authorization: `Token ${initObject().token}`,
-        }
-      }).then((res) => {
-          setEntityList([...entityList, { id : res.data.data.id, entity_name : res.data.data.entity_name}])
-      }).catch((error) => {
-          console.error(error.response)
-      })
+    // axios.post(`https://securechain.pythonanywhere.com/entity/`, payload,
+    //   {
+    //     headers: {
+    //         Authorization: `Token ${initObject().token}`,
+    //     }
+    //   }).then((res) => {
+    //       setEntityList([...entityList, { id : res.data.data.id, entity_name : res.data.data.entity_name}])
+    //   }).catch((error) => {
+    //       console.error(error.response)
+    //   })
+      setEntityList([...entityList, { id : i, entity_name : entityName}])
         setEntityName('')
         setInputFields([{
           name: '',
           type: '',
         }])
+        setI(i+1);
         setFormkey(formkey + 1);
         setTrigger(!trigger);
   }
@@ -119,7 +121,9 @@ const handleSubmitFlow = () => {
   })
   setFlow([]);
 }
-
+useEffect(() => {
+  console.log(entityList)
+},[entityList])
   return (
     <div className='entityCreationTop'>
       <form className='entityCreation' onSubmit={handleSubmit}>
