@@ -20,7 +20,7 @@ const CreateProduct = ({addProduct}) => {
 
     useEffect(() => {
         axios
-            .get('https://securechain.pythonanywhere.com/supplychain/',
+            .get('https://securechain-backend.herokuapp.com/supplychain/',
                 {
                     headers: {
                         Authorization: `Token ${token}`

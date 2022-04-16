@@ -13,7 +13,7 @@ function EnrolledSupplyChains() {
   const [enrolledsupplychain, setenrolledsupplychain] = useState([]);
   
   useEffect(() => {
-      axios.get('https://securechain.pythonanywhere.com/enrolledsupplychain/',
+      axios.get('https://securechain-backend.herokuapp.com/enrolledsupplychain/',
       {
         headers: 
         {

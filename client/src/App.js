@@ -8,12 +8,15 @@ import OwnedSupplyChains from './pages/dashboard/OwnedSupplyChains'
 import ParticipationRequests from './pages/dashboard/ParticipationRequests'
 import CreateEntity from './pages/entity/CreateEntity'
 import ProductTracking from './pages/tracking/ProductTracking'
-import EnrollInSupplyChain from './pages/enrollInSupplyChain/EnrollInSupplyChain'
 import SupplyChainManagement from "./contracts/SupplyChainManagement.json"
+import Login from './pages/login/Login'
+import EnrollInSupplyChain from './pages/enrollInSupplyChain/EnrollInSupplyChain'
 import EnrolledSupplyChains from './pages/dashboard/EnrolledSupplyChain'
 import TransferProduct from "./pages/transfer/TransferProduct.js"
 import getWeb3 from "./getWeb3"
 import CreateProduct from './pages/product/CreateProduct'
+import Optimal from './pages/optimal/Optimal'
+import Graph from './pages/graph/Graph'
 function App() {
 
   const [account, setAccount] = useState('');
@@ -214,6 +217,10 @@ function App() {
               // currentBatchesInOwnership={currentBatchesInOwnership}
             />
           </Route>
+          <Route exact path="/tracking" component={ProductTracking}/>
+          <Route exact path="/login" component={Login} />
+          <Route exact path='/optimal' component={Optimal} />
+          <Route exact path='/graph' component={Graph} />
         </Switch>
       </Router>
     </div>
