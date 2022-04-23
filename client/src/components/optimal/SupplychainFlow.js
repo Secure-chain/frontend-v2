@@ -14,12 +14,19 @@ const rfStyle = {
 
 function SupplychainFlow({instanceForInit, finalCst}) {
     const nodeStyle = { display: 'flex', alignItems: 'center', textAlign: 'center', background: '#cfdcf1', color: '#000', height: '0px', width: 'fit-content' };
-    const instances = Object.keys(instanceForInit)
-    const values = Object.values(instanceForInit)
+    let instances = []
+    let values = []
+    let temp = instanceForInit?.forEach((instance) => {
+        instances.push(Object.keys(instance)[0]);
+        values.push(Object.values(instance)[0])
+    })
+    console.log('instances',instances)
+    console.log('values',values)
+    
     const initElem = [
         {
             id: '1',
-            data: { label: `Total Vaccines (${finalCst})` },
+            data: { label: `Total Vaccine Cost (${finalCst})` },
             position: { x: 0, y: 0 },
             style: nodeStyle,
         },
@@ -57,25 +64,15 @@ function SupplychainFlow({instanceForInit, finalCst}) {
 
         {
             id: '6',
-            data: { label: `${instances[0]} (${values[0]}) ` },
+            data: { label: `${instances[1]} (${values[1]}) ` },
             position: { x: 0, y: 100 },
             style: nodeStyle,
             // parentNode: '2',
             // extent: 'parent',
         },
 
-        {
-            id: '7',
-            data: { label: 'Zydus Cadila (2L)' },
-            position: { x: 200, y: 100 },
-            style: nodeStyle,
-            // parentNode: '2',
-            // extent: 'parent',
-        },
-
         { id: 'e1-5', source: '1', target: '5', label: '' },
-        { id: 'e1-6', source: '1', target: '6', label: '' },
-        { id: 'e1-7', source: '1', target: '7', label: '' }
+        { id: 'e1-6', source: '1', target: '6', label: '' }
     ];
     // const initialNodes = [
     //     {
@@ -107,7 +104,7 @@ function SupplychainFlow({instanceForInit, finalCst}) {
     // const [edges, setEdges] = useState(initialEdges);
 
     return (
-        <div style={{ width: '100%', marginLeft: '400px'}}>
+        <div style={{ width: '100%'}}>
             <Fragment>
                 <ReactFlow
                     elements={initElem}
