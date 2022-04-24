@@ -27,7 +27,7 @@ function SupplychainFlow({instanceForInit, finalCst}) {
         {
             id: '1',
             data: { label: `Total Vaccine Cost (${finalCst})` },
-            position: { x: 0, y: 0 },
+            position: { x: -100, y: 0 },
             style: nodeStyle,
         },
 
