@@ -165,12 +165,13 @@ const [finalCost, setFinalCost] = useState(0);
                 value={goal}
             />
         <br/>
+        {addedConstraints.length !== 0 && <h3>Added Constraints</h3>}
         {
             addedConstraints.length !== 0 &&
             addedConstraints.map((constraint, index) => {
                 return(
                     <div className='constraint-text-container'>
-                    <h3>Added Constraints</h3>
+                    <br/><br/>
                         <div className='constraint-box'>
                             <span className='constraint-text'>{constraint.parameters[0].coefficient}</span>
                             <span className='constraint-text'>{' * '}</span>

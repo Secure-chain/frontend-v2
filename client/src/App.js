@@ -224,7 +224,7 @@ function App() {
           <Route exact path="/tracking" component={ProductTracking}/>
           <Route exact path="/login" component={Login} />
           {/* Redirect "/" to "/login" */}
-          <Redirect from = "/" to = "/login" />
+          <Redirect exact path from = "/" to = "/login" />
           <Route exact path='/optimal' component={Optimal} />
           <Route exact path='/graph' component={Graph} />
         </Switch>
