@@ -99,7 +99,7 @@ const TransferProduct = ({ getProductName, productsInSupplyChain, currentBatches
         console.log(supplychainid)
         setTransferSupplyChain(e.target.value)
         axios
-            .get('https://securechain-backend.herokuapp.com/allowedreceivers/' + supplychainid + '/',
+            .get('http://127.0.0.1:8000/allowedreceivers/' + supplychainid + '/',
                 {
                     headers: {
                         Authorization: `Token ${token}`

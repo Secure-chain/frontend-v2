@@ -38,25 +38,28 @@ const [finalCost, setFinalCost] = useState(0);
     const [constant, setConstant] = useState(0);
     const [coefficient, setCoefficient] = useState(0);
     const [showGraph , setShowGraph] = useState(true);
-    let history = useHistory();
 
+    let history = useHistory();
+    let constraint = [];
+    const handleConstraintAddition = () => {
+        let temp  = {
+                operator : selectedOperator,
+                constant : constant,
+                parameters : [
+                    {
+                        variable : selectedEntityInstanceId,
+                        coefficient : coefficient
+                    }
+                ]
+        }
+        constraint.push(temp);
+    }
 
     // creating findPathData 
     const postFindPathDataUtil = () => {
         const data = {
             goal : goal,
-            constraints : [
-                {
-                    operator : selectedOperator,
-                    constant : constant,
-                    parameters : [
-                        {
-                            variable : selectedEntityInstanceId,
-                            coefficient : coefficient
-                        }
-                    ]
-                }
-            ]
+            constraints : constraint
         }
         console.log("data to be sent in find path", data);
         postFindPathData(selectedSupplyChainId,selectedEntityId, data).then(res=> {
@@ -92,7 +95,7 @@ const [finalCost, setFinalCost] = useState(0);
     }, [selectedEntityId])
   return (
     <div className='optimal-container'>
-        <h1>Find Optimam chain path</h1>
+        <h1>Find Optimum chain path</h1>
         <div className='select-box'>
             <Box sx={{ minWidth: 300 }}>
                 <FormControl fullWidth>
@@ -217,6 +220,66 @@ const [finalCost, setFinalCost] = useState(0);
                 }}
             />
         </div>
+        {   constraint.length === 1 &&
+            <div className='constraint-container'>
+            <Input className='coeff-input' type='text' placeholder='Enter Coefficient' value={coefficient} onChange={(e) => setCoefficient(e.target.value)}/>
+            <div className='select-box entity-select'>
+                <Box sx={{ minWidth: 350 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Choose Entity Instance</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedEntityInstanceId}
+                            label="Select Entity Instance"
+                            onChange={(e) => {
+                                setSelectedEntityInstanceId(e.target.value)
+                            }}
+                        >
+                            {entityInstances?.map(entityInstance => {
+                                return (
+                                    <MenuItem value={entityInstance.id} key={entityInstance.id}>
+                                        {entityInstance.name}
+                                    </MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+            <div className='select-box'>
+                <Box sx={{ minWidth: 100 }}>
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Choose Operator</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedOperator}
+                            label="Select Operator"
+                            onChange={(e) => {
+                                setSelectedOperator(e.target.value)
+                            }}
+                        >
+                            {operators?.map(operator => {
+                                return (    
+                                    <MenuItem value={operator} key={operator}>
+                                        {operator}
+                                    </MenuItem>
+                                )
+                            })}
+                        </Select>
+                    </FormControl>
+                </Box>
+            </div>
+            <Input 
+                type='text'
+                placeholder='Enter constant'
+                value={constant}
+                onChange={(e)=>{
+                    setConstant(e.target.value)
+                }}
+            />
+        </div>}
         <Button 
             text='Add Constraint' 
             style={{width: '150px'}}

@@ -81,6 +81,8 @@ function App() {
   // fuunction to transfer batches of a product
   const transferProduct = async (productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId) => {
     setLoading(true)
+    console.log("Into Transfer Product", transferTo)
+    console.log("Into Transfer Product", transferToName)
     contract.methods.transferProduct(productNo, productName, batchesToTransfer, supplyChainId, transferTo, transferToName, timestamp, notificationId).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
     })
@@ -89,6 +91,8 @@ function App() {
   // function to request the transfer of batches of a product
   const requestTransfer = async (productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp) => {
     setLoading(true)
+    console.log("Into Request Transfer Product", transferTo)
+    console.log("Into Request Transfer Product", transferToName)
     contract.methods.requestTransfer(productNo, productName, batchesToTransfer, supplyChainId, currentOwnerName, transferTo, transferToName, timestamp).send({ from: account }).on('transactionHash', (hash) => {
       setLoading(false)
     })
