@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import Playground from './components/playground/Playground'
 import NavBar from './components/navBar/NavBar'
 import SideNav from './components/sideNav/SideNav'
@@ -223,6 +223,8 @@ function App() {
           </Route>
           <Route exact path="/tracking" component={ProductTracking}/>
           <Route exact path="/login" component={Login} />
+          {/* Redirect "/" to "/login" */}
+          <Redirect from = "/" to = "/login" />
           <Route exact path='/optimal' component={Optimal} />
           <Route exact path='/graph' component={Graph} />
         </Switch>
